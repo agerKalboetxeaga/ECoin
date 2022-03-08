@@ -29,7 +29,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="#">
     <img src="images/logo.png" alt="Logo">
   </a>
 
@@ -255,16 +255,16 @@ Use this space to list resources you find helpful and would like to give credit 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/agerKalboetxeaga/ERRONKA_3?style=for-the-badge
-[contributors-url]: https://github.com/agerKalboetxeaga/ERRONKA_3/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/agerKalboetxeaga/ERRONKA_3?style=for-the-badge
-[forks-url]:https://github.com/agerKalboetxeaga/ERRONKA_3/network/members
-[stars-shield]: https://img.shields.io/github/stars/agerKalboetxeaga/ERRONKA_3?style=for-the-badge
-[stars-url]:https://github.com/agerKalboetxeaga/ERRONKA_3/stargazers
-[issues-shield]: https://img.shields.io/github/issues/agerKalboetxeaga/ERRONKA_3?style=for-the-badge
-[issues-url]:https://github.com/agerKalboetxeaga/ERRONKA_3/issues
-[license-shield]: https://img.shields.io/github/license/agerKalboetxeaga/ERRONKA_3?style=for-the-badge
-[license-url]: https://github.com/agerKalboetxeaga/ERRONKA_3/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/agerKalboetxeaga/ECoin?style=for-the-badge
+[contributors-url]: https://github.com/agerKalboetxeaga/ECoin/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/agerKalboetxeaga/ECoin?style=for-the-badge
+[forks-url]:https://github.com/agerKalboetxeaga/ECoin/network/members
+[stars-shield]: https://img.shields.io/github/stars/agerKalboetxeaga/ECoin?style=for-the-badge
+[stars-url]:https://github.com/agerKalboetxeaga/ECoin/stargazers
+[issues-shield]: https://img.shields.io/github/issues/agerKalboetxeaga/ECoin?style=for-the-badge
+[issues-url]:https://github.com/agerKalboetxeaga/ECoin/issues
+[license-shield]: https://img.shields.io/github/license/agerKalboetxeaga/ECoin?style=for-the-badge
+[license-url]: https://github.com/agerKalboetxeaga/ECoin/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]:https://github.com/agerKalboetxeaga/ERRONKA_3
+[linkedin-url]:https://github.com/agerKalboetxeaga/ECoin
 [product-screenshot]: images/juegoscreen.jpg
