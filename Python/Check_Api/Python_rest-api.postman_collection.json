@@ -1,0 +1,97 @@
+{
+	"info": {
+		"_postman_id": "c7799c2c-1544-4954-aed2-941f6f317b88",
+		"name": "Python_rest-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:5000/crypt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Crypto_Name\": \"bitcoin\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/crypt",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"crypt"
+					]
+				},
+				"description": "para checkear si el filtro de nombre funciona"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/vcrypto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/vcrypto",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"vcrypto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/crypts",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Crypto_Name\" : \"immutable-x\",\r\n    \"Crypto_Symbol\" : \"imxxx\",\r\n    \"Crypto_Price\" : \"0.43445\",\r\n    \"Query_Date\" : \"08/03/2022 09:35:22\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/crypts",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"crypts"
+					]
+				},
+				"description": "To check if a import of a new coin is working"
+			},
+			"response": []
+		}
+	]
+}
