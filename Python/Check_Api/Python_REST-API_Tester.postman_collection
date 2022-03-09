@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "0d31720d-2ff7-4599-be4e-c2a38e9ed703",
+		"name": "Python_rest-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AddCrypto",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Crypto_Name\": \"bitcoin\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/crypt",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"crypt"
+					]
+				},
+				"description": "para checkear si el filtro de nombre funciona"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllCrypto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/vcrypto",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"vcrypto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteCrypto",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Crypto_Name\":\"iota\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/deletecrypto",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"deletecrypto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCertainCrypto",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

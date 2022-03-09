@@ -4,6 +4,8 @@ from bson import json_util
 
 from werkzeug.security import generate_password_hash, check_password_hash  # para hashear contraseñas...
 
+# El programa tarda de 12 a 15 segundos en actualizar los datos
+
 # Flask tiene una version de pymongo pensada para ser usada con flask (flask-pymongo)
 
 # Despues mas tarde, para automatizar el rollo podemos hacer una coleccion de nombres de cryptos
@@ -27,8 +29,8 @@ client = PyMongo(app)
 
 
 # Metodo que añade una nueva moneda al programa
-@app.route('/ncrypto', methods=['POST'])
-def create_crypto():
+@app.route('/addcrypto', methods=['POST'])
+def add_crypto():
     # request es un objeto con el que nos dejara gestionar
     # Porcierto, este metodo recive la informacion en formato json
 
@@ -45,17 +47,45 @@ def create_crypto():
         # si hubiera que hashear: hashed_pass = generate_password_hash(password)
         collection = client.db['coinNames']
         c_id = collection.insert_one(
-            {'Crypto_name': c_name,
-             'Crypto_symbol': c_symbol}
+            {'Crypto_Name': c_name,
+             'Crypto_Symbol': c_symbol}
         )
         response = {'id': str(c_id),  # Devolvemos el objeto recientemente creado
-                    'Crypto_name': c_name,
-                    'Crypto_symbol': c_symbol
+                    'Crypto_Name': c_name,
+                    'Crypto_Symbol': c_symbol
                     }
 
         return response
     else:
         return {'message': 'You must enter valid values'}
+
+
+# Method to delete sent crypto from de db
+@app.route('/deletecrypto', methods=['POST'])
+def deletecrypto():
+
+    c_name = request.json['Crypto_Name']    # solana
+
+    response = {'message': 'Error deleting, please enter valid name'}
+
+    if c_name:
+        collection = client.db['coinNames']
+
+        query = {
+            "Crypto_Name": c_name
+        }
+        try:
+            collection.delete_one(query)
+
+            response = {
+                'message': 'Crypto deleted successfully'
+            }
+
+        except Exception:
+            response = {
+                'message': "An error has ocurring during delete" + str(Exception)
+            }
+    return response
 
 
 @app.errorhandler(404)
@@ -86,6 +116,7 @@ def showCrypto():
 
     response = json_util.dumps(criptos)
     return Response(response, mimetype='application/json')
+
 
 # si ha avido algun cambio se rerunea automatico (creo)
 if __name__ == "__main__":
