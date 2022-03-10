@@ -1,7 +1,8 @@
+import os
 from flask import Flask, request, jsonify, Response
 from flask_pymongo import PyMongo
 from bson import json_util
-
+import subprocess
 from werkzeug.security import generate_password_hash, check_password_hash  # para hashear contraseñas...
 
 # El programa tarda de 12 a 15 segundos en actualizar los datos
@@ -63,8 +64,7 @@ def add_crypto():
 # Method to delete sent crypto from de db
 @app.route('/deletecrypto', methods=['POST'])
 def deletecrypto():
-
-    c_name = request.json['Crypto_Name']    # solana
+    c_name = request.json['Crypto_Name']  # solana
 
     response = {'message': 'Error deleting, please enter valid name'}
 
@@ -100,7 +100,6 @@ def not_found(error=None):
 
 @app.route('/vcrypto', methods=["GET"])
 def showAllCryptos():
-
     collection = client.db['cryptos']
     cryptos = collection.find()
 
@@ -118,6 +117,33 @@ def showCrypto():
     return Response(response, mimetype='application/json')
 
 
+# para runear el script crypto
+def runscript():
+    os.system("crypto_exe.exe")
+
+
+#vamosss porfin funciona. si mandas un json {"command": "run"} will launch the actualizer in the background.
+#else if you send {"command": "stop"} it will stop the program
+@app.route('/startexe', methods=['POST'])
+def runEXE():
+    response = {'message': ''}
+    global process
+    if request.json['command'] == 'run':
+        process = subprocess.Popen("crypto_exe.exe", stdout=subprocess.PIPE, shell=True)
+
+        response = {
+            'message': 'app started'
+        }
+
+    elif request.json['command'] == 'stop':
+        subprocess.Popen("TASKKILL /F /IM " + "crypto_exe.exe")
+        response = {
+            'message': 'app suspended'
+        }
+    return response
+
+
 # si ha avido algun cambio se rerunea automatico (creo)
 if __name__ == "__main__":
+
     app.run(debug=True)
