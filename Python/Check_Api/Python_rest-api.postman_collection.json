@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0d31720d-2ff7-4599-be4e-c2a38e9ed703",
+		"_postman_id": "9cefb612-0315-4fea-a260-1fa1c69d7d1f",
 		"name": "Python_rest-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -96,7 +96,10 @@
 			"name": "GetCertainCrypto",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -159,6 +162,40 @@
 					"port": "5000",
 					"path": [
 						"startexe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add cripto",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Crypto_Name\": \"bitcoin\",\r\n    \"Crypto_Symbol\": \"btc\"\r\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:5000/addcrypto",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"addcrypto"
 					]
 				}
 			},
