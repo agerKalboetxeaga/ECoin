@@ -1,6 +1,7 @@
 import os
 from flask import Flask, request, jsonify, Response
 from flask_pymongo import PyMongo
+from flask_cors import CORS
 from bson import json_util
 import subprocess
 from werkzeug.security import generate_password_hash, check_password_hash  # para hashear contraseñas...
@@ -102,9 +103,24 @@ def not_found(error=None):
 def showAllCryptos():
     collection = client.db['cryptos']
     cryptos = collection.find()
+    cryptoArray = []
 
-    response = json_util.dumps(cryptos)
+    for crypt in cryptos:
+        newData = {
+            'Crypto_Name': crypt['Crypto_Name'],
+            'Crypto_Symbol': crypt['Crypto_Symbol'],
+            'Crypto_Price': crypt['Crypto_Price'],
+            'Query_Date': crypt['Query_Date']
+        }
+        cryptoArray.append(newData)
+
+    response = json_util.dumps(cryptoArray)
     return Response(response, mimetype='application/json')  # Para que el cliente sepa que es un json
+
+
+
+
+
 
 
 # Receives json file where you put filter ej:  "Crypto_Name": "bitcoin" will return all documents of bitcoin
@@ -145,5 +161,5 @@ def runEXE():
 
 # si ha avido algun cambio se rerunea automatico (creo)
 if __name__ == "__main__":
-
+    CORS(app)
     app.run(debug=True)
