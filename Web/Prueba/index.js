@@ -11,4 +11,4 @@ fetch(`${API_URL}/vcrypto`)
     const template = cryptos.map((crypto) => `<li>${crypto.Crypto_Name} => ${crypto.Crypto_Price}€ \n <br>date: ${crypto.Query_Date}</li>`);
 
     HTMLResponse.innerHTML = `<ul>${template}</ul>`
-}).catch((err) => console.log(`Ha habido un error conectandose al servidor: ${API_URL} \n Error: ${err.message}`));
+}).catch((err) => alert(`Ha habido un error conectandose al servidor: ${API_URL} \n Error: ${err.message}`));
