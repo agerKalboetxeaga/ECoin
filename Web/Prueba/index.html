@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prueba de conexion API</title>
 </head>
@@ -10,4 +11,51 @@
     <div id="app"></div>
     <script src="index.js" type="module"></script>
 </body>
+<div data-role="fieldcontain" class="ui-hide-label" id="langDiv">
+</div>
 </html>
+
+<!--
+    https://stackoverflow.com/questions/30035932/how-do-i-use-this-javascript-variable-in-html#:~:text=You%20cannot%20use%20js%20variables,existing%20tags%20in%20the%20html.
+
+    Para probar si con esto funcionaa hay k kitar lo de type module kreo.
+    Y nose si poner el import donde lo vas a usar o ponerlo arriba del todo cambia algo
+    
+    Con lo del pive de la primera respuesta podemos acer alfo asi o:
+
+    //HTML:
+    <body>
+    <p id="output"></p>
+    </body>
+
+===============================================================================
+
+    //Index.js (por ejemplo):
+    function miFuncion (){
+        var name = prompt("What's your name?");
+    var lengthOfName = name.length
+
+    document.getElementById('output').innerHTML = lengthOfName;
+    }
+
+=====================================================================================
+
+    *** Para los bucles for y arrays (por ejemplo nuestras cryptos): ***
+
+    ``You'd probably want something like this: (Something.js)``
+
+function buildLanguages() {
+    var div = document.getElementById("langDiv");
+
+    var codigo_html_a_mostrar = "";
+    for (var i=0;i<lang.length;i++) {
+        codigo_html_a_mostrar += "<input type='checkbox' name='" + lang[i] + "' value='" + i + "' onClick=\"setValue(this.value);\">" + lang[i] + "<br>";
+    }
+
+    div.innerHTML = codigo_html_a_mostrar;
+}
+``And your html:``
+
+<div data-role="fieldcontain" class="ui-hide-label" id="langDiv">
+</div>
+-->
