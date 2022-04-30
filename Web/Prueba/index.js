@@ -13,26 +13,31 @@ fetch(`${API_URL}/vcrypto`)
     HTMLResponse.innerHTML = `<ul>${template}</ul>`
 }).catch((err) => alert(`Ha habido un error conectandose al servidor: ${API_URL} \n Error: ${err.message}`));
 
-/* POST DATA Send:
 
-let hashedpass: string;
+function register (){
+  let hashedpass;
 sha256(password).then(p => hashedpass = p);
 let xhr = new XMLHttpRequest();
-xhr.open("POST", API_URL + /register");
 
+
+xhr.open("POST", API_URL + "/register");
 xhr.setRequestHeader("Accept", "application/json");
 xhr.setRequestHeader("Content-Type", "application/json");
 
 xhr.onload = () => console.log(xhr.responseText);
  
 let data = `{
-  "Id": random,
-  "Username": username,
-  "Email": "Jason Sweet@gmail",
-  "password": hashedpass
+
+  "username": ${_username},
+  "email": ${_email},
+  "pass": ${hashedpass},
+  "name": ${_name},
+  "role": "usuario"
 }`;
 
 xhr.send(data);
+}
+
 
 // encriptador se puede borrar, no hace falta
 async function sha256(message) {
@@ -50,6 +55,6 @@ async function sha256(message) {
   console.log(hashHex);
   return hashHex;
 }
-*/
+
 
 

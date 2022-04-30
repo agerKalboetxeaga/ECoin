@@ -1,9 +1,11 @@
 import os
+
+import flask_pymongo
 from flask import Flask, request, jsonify, Response
 from flask_pymongo import PyMongo
-from flask_cors import CORS
 from bson import json_util
 import subprocess
+
 from werkzeug.security import generate_password_hash, check_password_hash  # para hashear contraseñas...
 
 # El programa tarda de 12 a 15 segundos en actualizar los datos
@@ -16,7 +18,7 @@ from werkzeug.security import generate_password_hash, check_password_hash  # par
 # y subiendo ese dato a mongo
 
 
-MONGO_HOST = "localhost"
+MONGO_HOST = "127.0.0.1"
 MONGO_PORT = "27017"  # No necesario pero se pone joder.
 DB_NAME = "express"
 MONGO_TIMEOUT = 1000
@@ -28,6 +30,74 @@ app.config['MONGO_URI'] = 'mongodb://' + MONGO_HOST + ":" + MONGO_PORT + "/" + D
 
 # Making client
 client = PyMongo(app)
+
+
+@app.route('/register', methods=['POST'])
+def register():
+    _username = request.json['username']
+    _password = request.json['pass']
+    _email = request.json['email']
+    _name = request.json['name']
+    _rol = request.json['role']
+
+    collection = client.db['users']
+    _id = collection.insert_one({
+        'username': _username,
+        'email': _email,
+        'name': _name,
+        'pass': _password,
+        'role': _rol
+    })
+    response = {
+        'message': "Username added succesfully",
+        'user': _username
+    }
+    return response
+
+
+@app.route('/login', methods=['POST'])
+def login():
+
+    _email = request.json["email"]
+    _passHash = request.json["pass"]
+
+
+    collection = client.db["users"]
+
+    result = collection.find({"email": _email})
+
+    if result is not None:
+        for user in result:
+            if user["pass"] == _passHash:
+                token = {
+                    "email": user["email"],
+                    "name": user["name"],
+                    "username": user["username"],
+                    "role": user["role"]
+                }
+
+    response = json_util.dumps(token)
+    return Response(response, mimetype='application/json')
+
+
+@app.route('/changePassword', methods=['POST'])
+def changePassword():
+    _email = request.json['email']
+    _newPass = request.json['newPass']
+
+    collection = client.db['users']
+
+    user = collection.find_one_and_update(
+        {"email": _email},
+        {
+            "$set": {"pass": _newPass}
+        }
+    )
+    message = {
+        "message": "password changed successfully"
+    }
+    response = json_util.dumps(message)
+    return Response(response, mimetype='application/json')
 
 
 # Metodo que añade una nueva moneda al programa
@@ -99,7 +169,7 @@ def not_found(error=None):
     return response
 
 
-@app.route('/vcrypto', methods=["GET"])
+@app.route('/getcryptos', methods=["GET"])
 def showAllCryptos():
     collection = client.db['cryptos']
     cryptos = collection.find()
@@ -107,6 +177,7 @@ def showAllCryptos():
 
     for crypt in cryptos:
         newData = {
+
             'Crypto_Name': crypt['Crypto_Name'],
             'Crypto_Symbol': crypt['Crypto_Symbol'],
             'Crypto_Price': crypt['Crypto_Price'],
@@ -118,16 +189,11 @@ def showAllCryptos():
     return Response(response, mimetype='application/json')  # Para que el cliente sepa que es un json
 
 
-
-
-
-
-
 # Receives json file where you put filter ej:  "Crypto_Name": "bitcoin" will return all documents of bitcoin
-@app.route('/crypt', methods=['POST'])
-def showCrypto():
+@app.route('/crypto/<Crypto_Name>', methods=['GET'])
+def showCrypto(Crypto_Name):
     collection = client.db['cryptos']
-    criptos = collection.find({'Crypto_Name': request.json['Crypto_Name']})
+    criptos = collection.find({'Crypto_Name': Crypto_Name})
 
     response = json_util.dumps(criptos)
     return Response(response, mimetype='application/json')
@@ -161,5 +227,5 @@ def runEXE():
 
 # si ha avido algun cambio se rerunea automatico (creo)
 if __name__ == "__main__":
-    CORS(app)
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
+
