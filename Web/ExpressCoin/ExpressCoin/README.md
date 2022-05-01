@@ -7,7 +7,7 @@ Run `ng serve --open` desde la terminal para ejecutar el servidor web en `http:/
 
 ## Crear componente (objeto ayudante html de la pagina)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `ng generate component pages/[pagina_padre]/[component-name]` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Editar HTML
 
