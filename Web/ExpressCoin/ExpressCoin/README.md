@@ -1,19 +1,19 @@
 # ExpressCoin
 
 
-## Development server
+## Runnear el server
 
 Run `ng serve --open` desde la terminal para ejecutar el servidor web en `http://localhost:4200/`. La aplicacion se actualiza cada vez que haces un cambio
 
-## Code scaffolding
+## Crear componente (objeto ayudante html de la pagina)
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Editar HTML
 
-Para editar el html entra en src pages [nombre de la pagina] y aveces tendra un componente suplementario para html : `pages/login/login-form`
+Para editar el html entra en src pages [nombre de la pagina] y en el archivo html que hay ai y aveces tendra un componente suplementario para html : `pages/login/login-form`
 
-Para crear una nueva pagina :
+### Para crear una nueva pagina :
  desde en cmd en la carpeta del proyecto: 
       `ng generate module pages/[nombre_pagina] -m=app --route=[ruta_pagina]`
 
