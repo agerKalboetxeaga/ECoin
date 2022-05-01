@@ -1,18 +1,21 @@
 # ExpressCoin
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.4.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `ng serve --open` desde la terminal para ejecutar el servidor web en `http://localhost:4200/`. La aplicacion se actualiza cada vez que haces un cambio
 
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Editar HTML
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Para editar el html entra en src pages [nombre de la pagina] y aveces tendra un componente suplementario para html : `pages/login/login-form`
+
+Para crear una nueva pagina :
+ desde en cmd en la carpeta del proyecto: 
+      `ng generate module pages/[nombre_pagina] -m=app --route=[ruta_pagina]`
 
 ## Running unit tests
 
