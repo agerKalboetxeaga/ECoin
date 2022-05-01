@@ -1,0 +1,7 @@
+#right{
+    
+    display: flex;
+}
+#right:hover {
+    color: aqua !important; 
+}

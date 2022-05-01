@@ -4,6 +4,7 @@ import flask_pymongo
 from flask import Flask, request, jsonify, Response
 from flask_pymongo import PyMongo
 from bson import json_util
+from flask_cors import CORS
 import subprocess
 
 from werkzeug.security import generate_password_hash, check_password_hash  # para hashear contraseñas...
@@ -46,7 +47,12 @@ def register():
         'email': _email,
         'name': _name,
         'pass': _password,
-        'role': _rol
+        'role': _rol,
+        'NFT': [{
+        }],
+        'Cryptos': [{
+
+        }]
     })
     response = {
         'message': "Username added succesfully",
@@ -61,7 +67,6 @@ def login():
     _email = request.json["email"]
     _passHash = request.json["pass"]
 
-
     collection = client.db["users"]
 
     result = collection.find({"email": _email})
@@ -70,10 +75,15 @@ def login():
         for user in result:
             if user["pass"] == _passHash:
                 token = {
-                    "email": user["email"],
-                    "name": user["name"],
-                    "username": user["username"],
-                    "role": user["role"]
+                    'data':
+                        {
+                            'token': {
+                                    "email": user["email"],
+                                    "name": user["name"],
+                                    "username": user["username"],
+                                    "role": user["role"]
+                            }
+                        }
                 }
 
     response = json_util.dumps(token)
@@ -98,6 +108,10 @@ def changePassword():
     }
     response = json_util.dumps(message)
     return Response(response, mimetype='application/json')
+
+
+
+
 
 
 # Metodo que añade una nueva moneda al programa
@@ -227,5 +241,6 @@ def runEXE():
 
 # si ha avido algun cambio se rerunea automatico (creo)
 if __name__ == "__main__":
+    CORS(app)
     app.run(debug=True, host="0.0.0.0")
 
