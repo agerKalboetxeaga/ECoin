@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
   register(_user : UserMaker){
     this.loginService.register(_user).subscribe(data => {
       this.router.navigate(['/main']);
-      alert("User registered");
+      //alert("User registered");
       });
   }
 
