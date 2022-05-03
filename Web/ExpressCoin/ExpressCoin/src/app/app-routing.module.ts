@@ -12,6 +12,7 @@ const routes: Routes = [
     { path: 'main', loadChildren: () => import('./pages/main/main.module').then(m => m.MainModule) },
     { path: '', redirectTo: 'main', pathMatch:'full'},
     { path: 'buycrypto', loadChildren: () => import('./pages/buying/buying.module').then(m => m.BuyingModule) },
+    { path: 'idoia-apruebanos-porfi', loadChildren: () => import('./pages/add-crypto-form/add-crypto-form.module').then(m => m.AddCryptoFormModule) },
     { path: '**', redirectTo: '', pathMatch:'full'}  
    ];
 

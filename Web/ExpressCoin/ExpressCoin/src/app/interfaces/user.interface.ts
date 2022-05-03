@@ -1,5 +1,5 @@
 import { NFT } from "./nft.interface";
-import { Cryptoo } from "./cryptocurrency.interface";
+import { CryptoSymbol } from "./Crypto.interface";
 
 export interface User {
     email: string;
@@ -8,6 +8,6 @@ export interface User {
     name : string | null;
     role : string | null;
     nft : NFT[] | null;
-    cryptos : Crypto[] | null;
+    cryptos : CryptoSymbol[] | null;
 
 }

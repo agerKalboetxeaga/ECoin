@@ -242,6 +242,8 @@ def getAllCrypts():
     response = json_util.dumps(cryptoArray)
     return Response(response, mimetype='application/json')  # Para que el cliente sepa que es un json
 
+
+
 # Receives json file where you put filter ej:  "Crypto_Name": "bitcoin" will return all documents of bitcoin
 @app.route('/crypto/<Crypto_Name>', methods=['GET'])
 def showCrypto(Crypto_Name):
