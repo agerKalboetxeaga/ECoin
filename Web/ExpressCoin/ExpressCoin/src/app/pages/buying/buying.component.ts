@@ -6,7 +6,7 @@ import { tap } from 'rxjs';
 import { User } from 'src/app/interfaces/user.interface';
 import { CryptoComponentComponent } from '../cryptocurrencies/crypto-component/crypto-component.component';
 import { compileDeclareDirectiveFromMetadata } from '@angular/compiler';
-import { throws } from 'assert';
+
 @Component({
   selector: 'app-buying',
   templateUrl: './buying.component.html',
@@ -42,7 +42,7 @@ crypto !: Cryptoo;
 
     this._cryptosymbol.quantity = input / this.crypto.price;
     this.user.cryptos?.push(this._cryptosymbol);
-    this.cryptoService.updateUser(this.user);
+    //this.cryptoService.updateUser(this.user);
 
   }
 }
