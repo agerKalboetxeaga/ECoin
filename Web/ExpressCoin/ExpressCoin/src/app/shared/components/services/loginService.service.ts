@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { User } from 'src/app/interfaces/user.interface';
 import { CookieService } from 'ngx-cookie-service';
 import { UserMaker } from 'src/app/models/user.model';
+import { Logresponse } from 'src/app/models/logresponse.model';
+import { LogResponseI } from 'src/app/interfaces/logresponse.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -31,11 +33,20 @@ export class LoginService {
             return this.client.post(URL, body, {'headers': headers});
         }
 
+        getUser(_username:string): Observable<User>
+        {
+            let URL = this.apiURL + 'getUser';
+            return this.client.get<User>(URL);
+        }
+
+
         setToken(token : string) : void{
             this.cookies.set('token', token);
 
         }
         getToken() {
+            
             return this.cookies.get("token");
+
         }
 }

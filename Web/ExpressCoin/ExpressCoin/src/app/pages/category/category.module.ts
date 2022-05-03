@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { CategoryRoutingModule } from './category-routing.module';
 import { CategoryComponent } from './category.component';
+import { CategoryComponentComponent } from './category-component/category-component.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    CategoryComponent
+    CategoryComponent,
+    CategoryComponentComponent
   ],
   imports: [
     CommonModule,
-    CategoryRoutingModule
+    CategoryRoutingModule,
+    FormsModule
   ]
 })
 export class CategoryModule { }

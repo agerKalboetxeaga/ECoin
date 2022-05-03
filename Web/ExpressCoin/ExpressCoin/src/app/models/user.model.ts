@@ -1,5 +1,5 @@
 import { NFT } from "../interfaces/nft.interface";
-import { Crypto } from "../interfaces/Crypto.interface";
+import { Cryptoo } from "../interfaces/cryptocurrency.interface";
 
 export class UserMaker {
     email: string | null;

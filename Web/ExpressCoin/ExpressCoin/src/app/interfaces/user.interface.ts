@@ -1,5 +1,5 @@
 import { NFT } from "./nft.interface";
-import { Crypto } from "./Crypto.interface";
+import { Cryptoo } from "./cryptocurrency.interface";
 
 export interface User {
     email: string;

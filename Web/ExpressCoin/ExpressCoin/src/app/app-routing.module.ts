@@ -11,6 +11,7 @@ const routes: Routes = [
     { path: 'no-fungible-tokens', loadChildren: () => import('./pages/nfts/nfts.module').then(m => m.NftsModule) }, 
     { path: 'main', loadChildren: () => import('./pages/main/main.module').then(m => m.MainModule) },
     { path: '', redirectTo: 'main', pathMatch:'full'},
+    { path: 'buycrypto', loadChildren: () => import('./pages/buying/buying.module').then(m => m.BuyingModule) },
     { path: '**', redirectTo: '', pathMatch:'full'}  
    ];
 

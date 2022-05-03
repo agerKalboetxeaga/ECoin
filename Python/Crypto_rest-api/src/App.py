@@ -74,20 +74,40 @@ def login():
     if result is not None:
         for user in result:
             if user["pass"] == _passHash:
-                token = {
-                    'data':
-                        {
-                            'token': {
-                                    "email": user["email"],
-                                    "name": user["name"],
-                                    "username": user["username"],
-                                    "role": user["role"]
-                            }
-                        }
+                payload_data = {
+                    "email": user["email"],
+                    "username": user["username"],
+                    "role": user["role"]
                 }
+                token = user['username']
 
-    response = json_util.dumps(token)
+                sendData = {
+                    "data": {
+                        "user": payload_data,
+                        "token": token
+                    }
+                }
+    response = json_util.dumps(sendData)
     return Response(response, mimetype='application/json')
+
+
+@app.route('/getUser/<_u_username>', methods=['GET'])
+def getUser(_u_username):
+    collection = client.db['users']
+    user = collection.find({"username":_u_username})
+    response = {}
+    for u in user:
+        response = {
+            "email": u['email'],
+            "pass": u['pass'],
+            "username": u['username'],
+            "name": u['name'],
+            "role": u['role'],
+            "nft": u['NFT'],
+            "crypto": u['Cryptos']
+        }
+    reresponse = json_util.dumps(response)
+    return Response(reresponse, mimetype='application/json')
 
 
 @app.route('/changePassword', methods=['POST'])
@@ -190,10 +210,11 @@ def showAllCryptos():
     cryptoArray = []
 
     for crypt in cryptos:
+        _myid = str(crypt['_id'])
         newData = {
-
-            'Crypto_Name': crypt['Crypto_Name'],
-            'Crypto_Symbol': crypt['Crypto_Symbol'],
+            'id': _myid,
+            'name': crypt['Crypto_Name'],
+            'symbol': crypt['Crypto_Symbol'],
             'Crypto_Price': crypt['Crypto_Price'],
             'Query_Date': crypt['Query_Date']
         }
@@ -203,13 +224,44 @@ def showAllCryptos():
     return Response(response, mimetype='application/json')  # Para que el cliente sepa que es un json
 
 
+@app.route('/getcryptosymbol', methods=["GET"])
+def getAllCrypts():
+    collection = client.db['coinNames']
+    cryptos = collection.find()
+    cryptoArray = []
+
+    for crypt in cryptos:
+        _myid = str(crypt['_id'])
+        newData = {
+            'id': _myid,
+            'name': crypt['Crypto_Name'],
+            'symbol': crypt['Crypto_Symbol'],
+        }
+        cryptoArray.append(newData)
+
+    response = json_util.dumps(cryptoArray)
+    return Response(response, mimetype='application/json')  # Para que el cliente sepa que es un json
+
 # Receives json file where you put filter ej:  "Crypto_Name": "bitcoin" will return all documents of bitcoin
 @app.route('/crypto/<Crypto_Name>', methods=['GET'])
 def showCrypto(Crypto_Name):
     collection = client.db['cryptos']
     criptos = collection.find({'Crypto_Name': Crypto_Name})
 
-    response = json_util.dumps(criptos)
+    cryptoArray = []
+
+    for crypt in criptos:
+        _myid = str(crypt['_id'])
+        newData = {
+            'id': _myid,
+            'name': crypt['Crypto_Name'],
+            'symbol': crypt['Crypto_Symbol'],
+            'price': crypt['Crypto_Price'],
+            'date': crypt['Query_Date']
+        }
+        cryptoArray.append(newData)
+
+    response = json_util.dumps(cryptoArray)
     return Response(response, mimetype='application/json')
 
 
