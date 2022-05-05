@@ -6,6 +6,7 @@ from flask_pymongo import PyMongo
 from bson import json_util
 from flask_cors import CORS
 import subprocess
+from datetime import datetime
 
 from werkzeug.security import generate_password_hash, check_password_hash  # para hashear contraseñas...
 
@@ -89,6 +90,60 @@ def login():
                 }
     response = json_util.dumps(sendData)
     return Response(response, mimetype='application/json')
+
+# Para compras cryptos
+@app.route('/setUser', methods=['POST'])
+def setUser():
+
+    _username = request.json["username"]
+    _cryptoos = request.json["cryptos"]
+    _cryptoBalance = request.json['resta']
+
+
+    collection = client.db['users']
+    _previousUsers = collection.find({"username": _username})
+
+    # Second part
+
+    for u in _previousUsers:
+        previousCryptos = u["Cryptos"]
+
+    _currentUsers = collection.find({"username":_username})
+    currentCryptos = _cryptoos
+
+    count = 0
+    for crypto in currentCryptos:
+
+
+
+
+
+        now = datetime.now()
+        # dd/mm/YY H:M:S
+        dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+        previousVal = crypto['quantity']
+        crypto['quantity'] = _cryptoBalance
+        # Third part
+        collection = client.db['transactions']
+        _id = collection.insert_one({
+            "user": _username,
+            "crypto": crypto,
+            "date": dt_string
+        })
+
+        count = count + 1
+        crypto['quantity'] = previousVal
+    collection = client.db['users']
+    user = collection.find_one_and_update(
+        {"username": _username},
+        {
+            "$set": {"Cryptos": _cryptoos}
+        }
+    )
+    response = {
+        "message": "update succeed"
+    }
+    return response
 
 
 @app.route('/getUser/<_u_username>', methods=['GET'])
