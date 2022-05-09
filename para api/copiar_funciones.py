@@ -128,7 +128,7 @@ def setUser():
         # Third part
         collection = client.db['transactions']
         _id = collection.insert_one({
-            "user": _username,
+            "buyer": _username,
             "crypto": crypto,
             "price": _price,
             "date": dt_string
@@ -149,8 +149,8 @@ def setUser():
     return response
 
 
-@app.route('/getTransactions', methods=['GET'])
-def getTransactions():
+@app.route('/getCryptoTransactions', methods=['GET'])
+def getCTransactions():
     collection = client.db['transactions']
     transactions = collection.find()
 
@@ -161,7 +161,25 @@ def getTransactions():
             "user": transaction['user'],
             "crypto": transaction['crypto'],
             "price": transaction['price'],
-            "symbol": "€",
+            "date": transaction['date']
+        }
+    response = json_util.dumps(data)
+    return Response(response, mimetype='application/json')
+
+
+@app.route('/getNFTTransactions', methods=['GET'])
+def getNTransactions():
+    collection = client.db['NFTtransactions']
+    transactions = collection.find()
+
+    for transaction in transactions:
+        _id = str(transaction['_id'])
+        data = {
+            "id": _id,
+            "buyer": transaction['buyer'],
+            "seller": transaction['seller'],
+            "NFT": transaction['NFT'],
+            "price": transaction['price'],
             "date": transaction['date']
         }
     response = json_util.dumps(data)
@@ -171,7 +189,7 @@ def getTransactions():
 @app.route('/getUser/<_u_username>', methods=['GET'])
 def getUser(_u_username):
     collection = client.db['users']
-    user = collection.find({"username":_u_username})
+    user = collection.find({"email": _u_username})
     response = {}
     for u in user:
         response = {
@@ -229,20 +247,18 @@ def createNFTTransaction():
     _s_username = request.json['seller']    # Seller´s username
     _NFT = request.json['NFT']
     _value = request.json['price']          # Buy Value
-    _symbol = request.json['symbol']
 
     now = datetime.now()
     # dd/mm/YY H:M:S
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 
-    collection = client.db['transactions']
+    collection = client.db['NFTtransactions']
     _id = collection.insert_one(
         {
             "buyer": _b_username,
             "seller": _s_username,
             "NFT": _NFT,
             "price": _value,
-            "symbol": _symbol,
             "date": dt_string
         }
     )
@@ -360,6 +376,22 @@ def getAllCrypts():
     response = json_util.dumps(cryptoArray)
     return Response(response, mimetype='application/json')  # Para que el cliente sepa que es un json
 
+
+@app.route('/getSymbol/<CryptoSymbol>', methods=['GET'])
+def getSymbol(CryptoSymbol):
+    collection = client.db['coinNames']
+    symbols = collection.find({"symbol": CryptoSymbol})
+
+    for symbol in symbols:
+        _id = str(symbol['_id'])
+        data = {
+            "id" : _id,
+            "name" : symbol['Crypto_Name'],
+            "symbol" : symbol['Crypto_Symbol']
+        }
+    response = json_util.dumps(data)
+
+    return Response(response, mimetype='application/json')
 
 
 # Receives json file where you put filter ej:  "Crypto_Name": "bitcoin" will return all documents of bitcoin
