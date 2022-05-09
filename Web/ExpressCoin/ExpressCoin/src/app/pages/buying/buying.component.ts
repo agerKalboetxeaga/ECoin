@@ -45,13 +45,23 @@ crypto !: Cryptoo;
     previousUser = this.user;
     let input : number = 5;
     let resta : number = 0;
+    let cryptosNames: string[] = [];
+    let found:boolean=false;
 
     this._cryptosymbol.quantity = input / this.crypto.price; //lo que puede comprar
    
     if (this.user.cryptos !== null){
 
+      this.user.cryptos.forEach(crypto => {
+        cryptosNames.push(crypto.name)
+      })
+
+      
+
       this.user.cryptos?.forEach(crypto => {
       if (crypto.name == this._cryptosymbol.name && crypto !== null){
+
+          found = true;
           // @ts-ignore: Object is possibly 'null'.
           if(crypto.quantity > this._cryptosymbol.quantity){
             // @ts-ignore: Object is possibly 'null'.
@@ -69,17 +79,22 @@ crypto !: Cryptoo;
       }
     });
     }else{
-      this.user.cryptos = [];
 
+      this.user.cryptos = [];
       // @ts-ignore: Object is possibly 'null'.
       resta = this._cryptoSymbol.quantity;
       this.user.cryptos.push(this._cryptosymbol);
     }
+     if(!found){
+      this.user.cryptos.push(this._cryptosymbol);
+      resta = this._cryptosymbol.quantity;
+      }
+
+
+    this.cryptoSymbol.quantity = null
+    let buyData = new BuyCrypto(this.user, this.cryptoSymbol, resta, this.crypto.price);
     
-
-
-    let buyData = new BuyCrypto(this.user, resta);
-    this.cryptoService.updateUser(this.user);
+    this.cryptoService.updateUser(buyData);
 
   }
 }

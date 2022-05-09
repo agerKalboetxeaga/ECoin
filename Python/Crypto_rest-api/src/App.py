@@ -91,6 +91,7 @@ def login():
     response = json_util.dumps(sendData)
     return Response(response, mimetype='application/json')
 
+
 # Para compras cryptos
 @app.route('/setUser', methods=['POST'])
 def setUser():
@@ -98,7 +99,6 @@ def setUser():
     _username = request.json["username"]
     _cryptoos = request.json["cryptos"]
     _cryptoBalance = request.json['resta']
-
 
     collection = client.db['users']
     _previousUsers = collection.find({"username": _username})
@@ -113,10 +113,6 @@ def setUser():
 
     count = 0
     for crypto in currentCryptos:
-
-
-
-
 
         now = datetime.now()
         # dd/mm/YY H:M:S
@@ -183,10 +179,6 @@ def changePassword():
     }
     response = json_util.dumps(message)
     return Response(response, mimetype='application/json')
-
-
-
-
 
 
 # Metodo que añade una nueva moneda al programa

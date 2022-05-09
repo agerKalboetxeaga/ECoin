@@ -1,1 +1,19 @@
-<p>add-crypto-form works!</p>
+<h1>CREATE A NFT</h1>
+<div>
+    <label>NFT Name</label>
+    <input type="text" id="nft_name" placeholder="Nombre"> 
+
+    <label>Creator</label>
+    <input  type="text" id="nft_creator" placeholder="creador">
+
+    <label> Price </label>
+    <input  type="text" id="nft_price" placeholder="price">
+    
+    <label> CryptoCurrency </label>
+    <select id="cypto_symbol"></select>
+
+    <label> Image </label>
+    <input  type="file" id="nft_img" (change)="onFileSelected($event)">
+    <button (click)="addNFT()">Añadir!</button>
+</div>
+

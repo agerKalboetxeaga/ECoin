@@ -31,6 +31,9 @@ export class LoginComponent implements OnInit {
 
       this.loginService.setToken(data.token);
 
+
+      this.loginService.userEmail = _user.email;
+
       this.router.navigate(['/main']);
     });
     

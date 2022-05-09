@@ -13,6 +13,7 @@ import { LogResponseI } from 'src/app/interfaces/logresponse.interface';
 export class LoginService {
     apiURL = 'http://192.168.1.138:5000/';
     user !: User;
+    userEmail : any;
 
     constructor(private client : HttpClient, private cookies: CookieService){}
 
