@@ -11,7 +11,7 @@ import { LogResponseI } from 'src/app/interfaces/logresponse.interface';
     providedIn: 'root'
   })
 export class LoginService {
-    apiURL = 'http://192.168.1.138:5000/';
+    apiURL = 'http://localhost:5000/';
     user !: User;
     userEmail : any;
 
@@ -36,7 +36,7 @@ export class LoginService {
 
         getUser(_username:string): Observable<User>
         {
-            let URL = this.apiURL + 'getUser';
+            let URL = this.apiURL + 'getUser/'+_username;
             return this.client.get<User>(URL);
         }
 

@@ -7,6 +7,8 @@ import { BuyCrypto } from 'src/app/models/buyCrypto.model';
 import { User } from 'src/app/interfaces/user.interface';
 import { CryptoComponentComponent } from '../cryptocurrencies/crypto-component/crypto-component.component';
 import { compileDeclareDirectiveFromMetadata } from '@angular/compiler';
+import { LoginService } from 'src/app/shared/components/services/loginService.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-buying',
@@ -17,84 +19,104 @@ export class BuyingComponent implements OnInit {
 cryptoSymbol !: CryptoSymbol;
 cryptocurrency !: Cryptoo[];
 user !: User;
-_cryptosymbol !: CryptoSymbol;
+
 crypto !: Cryptoo;
 
 
-  constructor(private cryptoService : CryptoService) { }
+  constructor(private cryptoService : CryptoService,
+    private loginSvc : LoginService,
+    private router : Router) { }
 
   ngOnInit(): void {
     this.cryptoSymbol= this.cryptoService.crypto;
 
     this.cryptoService.getCrypto(this.cryptoSymbol.name)
     .pipe(
-      tap((cryp : Cryptoo[]) => {this.cryptocurrency = cryp; console.log(this.cryptocurrency[this.cryptocurrency.length -1])})
+      tap((cryp : Cryptoo[]) => {
+        this.cryptocurrency = cryp;
+        console.log(this.cryptocurrency[this.cryptocurrency.length -1]);
+        this.crypto = this.cryptocurrency[this.cryptocurrency.length -1];})
     ).subscribe();
-    this.crypto = this.cryptocurrency[this.cryptocurrency.length -1];
-    this._cryptosymbol = this.cryptoSymbol;
+    
+    
 
-     
+     this.loginSvc.getUser(this.loginSvc.getToken()).pipe(
+       tap((_user : User) => {this.user = _user;})
+     ).subscribe();
     
       
     
   }
-  comprar(){
+  comprar(_user :User, _cryptosymbol:CryptoSymbol){
 
     //tenemos que hacer la resta entre la crypto que ha comprau - el que tiene
     let previousUser : User;
-    previousUser = this.user;
-    let input : number = 5;
+    previousUser = _user;
+    let input = parseFloat((<HTMLInputElement> document.getElementById("_moneyInput")).value);
     let resta : number = 0;
     let cryptosNames: string[] = [];
     let found:boolean=false;
 
-    this._cryptosymbol.quantity = input / this.crypto.price; //lo que puede comprar
+    _cryptosymbol.quantity = input / this.crypto.price; //lo que puede comprar
    
-    if (this.user.cryptos !== null){
+    
+    if (this.user.cryptos != null){
 
-      this.user.cryptos.forEach(crypto => {
+      
+     this.user.cryptos?.forEach(crypto => {
+        
         cryptosNames.push(crypto.name)
-      })
-
+      });
+      
+      console.log( "names :" +cryptosNames);
       
 
       this.user.cryptos?.forEach(crypto => {
-      if (crypto.name == this._cryptosymbol.name && crypto !== null){
+      if (crypto.name == _cryptosymbol.name && crypto !== null){
 
           found = true;
           // @ts-ignore: Object is possibly 'null'.
-          if(crypto.quantity > this._cryptosymbol.quantity){
+          if(crypto.quantity > _cryptosymbol.quantity){
             // @ts-ignore: Object is possibly 'null'.
-            resta = crypto.quantity - this._cryptosymbol.quantity;
+            resta = crypto.quantity - _cryptosymbol.quantity;
           }else{
-            // @ts-ignore: Object is possibly 'null'.
-            resta = this._cryptosymbol - crypto.quantity;
+           // @ts-ignore: Object is possibly 'null'.
+            resta = _cryptosymbol.quantity - crypto.quantity;
           }
          
         
         // @ts-ignore: Object is possibly 'null'.
-        crypto.quantity = crypto.quantity + this._cryptoSymbol.quantity;
+        crypto.quantity = crypto.quantity + _cryptosymbol.quantity;
         
-        console.log(resta);
+        console.log("resta = " +resta);
+
       }
     });
     }else{
 
       this.user.cryptos = [];
-      // @ts-ignore: Object is possibly 'null'.
-      resta = this._cryptoSymbol.quantity;
-      this.user.cryptos.push(this._cryptosymbol);
+     
+      resta = _cryptosymbol.quantity;
+      this.user.cryptos.push(_cryptosymbol);
     }
      if(!found){
-      this.user.cryptos.push(this._cryptosymbol);
-      resta = this._cryptosymbol.quantity;
+      this.user.cryptos?.push(_cryptosymbol);
+      resta = _cryptosymbol.quantity;
       }
 
-
-    this.cryptoSymbol.quantity = null
-    let buyData = new BuyCrypto(this.user, this.cryptoSymbol, resta, this.crypto.price);
+      
+      let cryptoArray: CryptoSymbol[] = [];
+      cryptoArray.push(_cryptosymbol);
+   
+      console.log("symbol:" + _cryptosymbol)
+      let buyData = new BuyCrypto(this.loginSvc.getToken(), cryptoArray, resta, this.crypto.price);
+      console.log(buyData)
+      this.cryptoService.updateUser(buyData).subscribe();
+      this.router.navigate(["/main"]);
     
-    this.cryptoService.updateUser(buyData);
-
+    
+    
+   
+    
   }
 }

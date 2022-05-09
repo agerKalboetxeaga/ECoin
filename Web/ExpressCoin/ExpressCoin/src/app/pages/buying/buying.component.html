@@ -1,13 +1,24 @@
-<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-    <br>
-    <br>
-    <br>
-    <br>
-    {{cryptoSymbol.name}}
-    <app-buying-view
+<div class="top-div">
+    <h1> COMPRAR {{cryptoSymbol.name}}</h1>
+    <section class="buyChart">
+        <label>Cuantos {{cryptoSymbol.name}} quieres comprar?</label><br>
+        <label>{{crypto.price}}€</label><br>
+        <input type="text" id="_moneyInput" placeholder="€"><br>
+        <button (click)="comprar(user,cryptoSymbol)">Comprar</button> 
+    </section>
+</div>
     
-    >
+    
+    
+    
+    
+    
+    
+    
+    <!--
 
-    </app-buying-view>
-</p>
+<app-buying-view>
+</app-buying-view>
+    -->
+    
+

@@ -1,19 +1,29 @@
-<h1>CREATE A NFT</h1>
-<div>
-    <label>NFT Name</label>
-    <input type="text" id="nft_name" placeholder="Nombre"> 
+<!--
 
-    <label>Creator</label>
-    <input  type="text" id="nft_creator" placeholder="creador">
+        Ruta:
+        http://localhost:4200/idoia-apruebanos-porfi
 
-    <label> Price </label>
-    <input  type="text" id="nft_price" placeholder="price">
-    
-    <label> CryptoCurrency </label>
-    <select id="cypto_symbol"></select>
+                                                        -->
 
-    <label> Image </label>
-    <input  type="file" id="nft_img" (change)="onFileSelected($event)">
-    <button (click)="addNFT()">Añadir!</button>
+
+
+<div class="container">
+    <h1>CREATE A NFT</h1><br>
+    <div>
+        <label>NFT Name ==> </label>
+        <input type="text" id="nft_name" placeholder="Nombre"><br>
+
+        <label>Creator</label>
+        <input  type="text" id="nft_creator" placeholder="creador"><br>
+
+        <label> Price </label>
+        <input  type="text" id="nft_price" placeholder="price"><br>
+
+        <label> CryptoCurrency </label>
+        <select id="cypto_symbol"></select><br>
+
+        <label> Image </label>
+        <input  type="file" id="nft_img" (change)="onFileSelected($event)"><br>
+        <button (click)="addNFT()">Añadir!</button>
+    </div>
 </div>
-

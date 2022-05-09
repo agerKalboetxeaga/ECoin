@@ -100,7 +100,7 @@ def login():
 @app.route('/setUser', methods=['POST'])
 def setUser():
 
-    _username = request.json["username"]
+    _username = request.json["user"]
     _cryptoos = request.json["cryptos"]
     _cryptoBalance = request.json['resta']
     _price = request.json['price']
@@ -128,7 +128,7 @@ def setUser():
         # Third part
         collection = client.db['transactions']
         _id = collection.insert_one({
-            "buyer": _username,
+            "user": _username,
             "crypto": crypto,
             "price": _price,
             "date": dt_string
@@ -153,6 +153,7 @@ def setUser():
 def getCTransactions():
     collection = client.db['transactions']
     transactions = collection.find()
+    transactionArray = []
 
     for transaction in transactions:
         _id = str(transaction['_id'])
@@ -163,7 +164,8 @@ def getCTransactions():
             "price": transaction['price'],
             "date": transaction['date']
         }
-    response = json_util.dumps(data)
+        transactionArray.append(data)
+    response = json_util.dumps(transactionArray)
     return Response(response, mimetype='application/json')
 
 
@@ -189,12 +191,11 @@ def getNTransactions():
 @app.route('/getUser/<_u_username>', methods=['GET'])
 def getUser(_u_username):
     collection = client.db['users']
-    user = collection.find({"email": _u_username})
+    user = collection.find({"username": _u_username})
     response = {}
     for u in user:
         response = {
             "email": u['email'],
-            "pass": u['pass'],
             "username": u['username'],
             "name": u['name'],
             "role": u['role'],
@@ -228,20 +229,23 @@ def changePassword():
 #   Para las compras
 @app.route('/setNFT', methods=['POST'])
 def setNFT():
-    _username = request.json['username']
-    _NFT = request.json['NFT']
+    _username = request.json['email']
+    _NFT = request.json['nft']
 
     collection = client.db['users']
 
     user = collection.find_one_and_update(
-        {"user":_username},
+        {"email":_username},
         {
             "$set": {"NFT": _NFT}
         }
     )
+    response ={
+        "guud":"shit"
+    }
+    return response
 
-
-@app.route('createNFTTransaction', methods=['POST'])
+@app.route('/createNFTTransaction', methods=['POST'])
 def createNFTTransaction():
     _b_username = request.json['buyer']     # Buyer´s username
     _s_username = request.json['seller']    # Seller´s username
@@ -265,7 +269,7 @@ def createNFTTransaction():
     response = {
         "message": "transaction made succesfully"
     }
-
+    return response
 
 
 # Metodo que añade una nueva moneda al programa

@@ -20,6 +20,10 @@ from werkzeug.security import generate_password_hash, check_password_hash  # par
 # y subiendo ese dato a mongo
 
 
+
+
+# GET TRANSACTIONS, ADD TRANSACTIONS, SET NFTS(PARA AÑADIR, COMPRAR, VENDER)
+
 MONGO_HOST = "127.0.0.1"
 MONGO_PORT = "27017"  # No necesario pero se pone joder.
 DB_NAME = "express"
@@ -96,9 +100,10 @@ def login():
 @app.route('/setUser', methods=['POST'])
 def setUser():
 
-    _username = request.json["username"]
+    _username = request.json["user"]
     _cryptoos = request.json["cryptos"]
     _cryptoBalance = request.json['resta']
+    _price = request.json['price']
 
     collection = client.db['users']
     _previousUsers = collection.find({"username": _username})
@@ -119,11 +124,13 @@ def setUser():
         dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
         previousVal = crypto['quantity']
         crypto['quantity'] = _cryptoBalance
+
         # Third part
         collection = client.db['transactions']
         _id = collection.insert_one({
             "user": _username,
             "crypto": crypto,
+            "price": _price,
             "date": dt_string
         })
 
@@ -142,15 +149,53 @@ def setUser():
     return response
 
 
+@app.route('/getCryptoTransactions', methods=['GET'])
+def getCTransactions():
+    collection = client.db['transactions']
+    transactions = collection.find()
+    transactionArray = []
+
+    for transaction in transactions:
+        _id = str(transaction['_id'])
+        data = {
+            "id": _id,
+            "user": transaction['user'],
+            "crypto": transaction['crypto'],
+            "price": transaction['price'],
+            "date": transaction['date']
+        }
+        transactionArray.append(data)
+    response = json_util.dumps(transactionArray)
+    return Response(response, mimetype='application/json')
+
+
+@app.route('/getNFTTransactions', methods=['GET'])
+def getNTransactions():
+    collection = client.db['NFTtransactions']
+    transactions = collection.find()
+
+    for transaction in transactions:
+        _id = str(transaction['_id'])
+        data = {
+            "id": _id,
+            "buyer": transaction['buyer'],
+            "seller": transaction['seller'],
+            "NFT": transaction['NFT'],
+            "price": transaction['price'],
+            "date": transaction['date']
+        }
+    response = json_util.dumps(data)
+    return Response(response, mimetype='application/json')
+
+
 @app.route('/getUser/<_u_username>', methods=['GET'])
 def getUser(_u_username):
     collection = client.db['users']
-    user = collection.find({"username":_u_username})
+    user = collection.find({"username": _u_username})
     response = {}
     for u in user:
         response = {
             "email": u['email'],
-            "pass": u['pass'],
             "username": u['username'],
             "name": u['name'],
             "role": u['role'],
@@ -179,6 +224,52 @@ def changePassword():
     }
     response = json_util.dumps(message)
     return Response(response, mimetype='application/json')
+
+
+#   Para las compras
+@app.route('/setNFT', methods=['POST'])
+def setNFT():
+    _username = request.json['email']
+    _NFT = request.json['nft']
+
+    collection = client.db['users']
+
+    user = collection.find_one_and_update(
+        {"email":_username},
+        {
+            "$set": {"NFT": _NFT}
+        }
+    )
+    response ={
+        "guud":"shit"
+    }
+    return response
+
+@app.route('/createNFTTransaction', methods=['POST'])
+def createNFTTransaction():
+    _b_username = request.json['buyer']     # Buyer´s username
+    _s_username = request.json['seller']    # Seller´s username
+    _NFT = request.json['NFT']
+    _value = request.json['price']          # Buy Value
+
+    now = datetime.now()
+    # dd/mm/YY H:M:S
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+
+    collection = client.db['NFTtransactions']
+    _id = collection.insert_one(
+        {
+            "buyer": _b_username,
+            "seller": _s_username,
+            "NFT": _NFT,
+            "price": _value,
+            "date": dt_string
+        }
+    )
+    response = {
+        "message": "transaction made succesfully"
+    }
+    return response
 
 
 # Metodo que añade una nueva moneda al programa
@@ -289,6 +380,22 @@ def getAllCrypts():
     response = json_util.dumps(cryptoArray)
     return Response(response, mimetype='application/json')  # Para que el cliente sepa que es un json
 
+
+@app.route('/getSymbol/<CryptoSymbol>', methods=['GET'])
+def getSymbol(CryptoSymbol):
+    collection = client.db['coinNames']
+    symbols = collection.find({"symbol": CryptoSymbol})
+
+    for symbol in symbols:
+        _id = str(symbol['_id'])
+        data = {
+            "id" : _id,
+            "name" : symbol['Crypto_Name'],
+            "symbol" : symbol['Crypto_Symbol']
+        }
+    response = json_util.dumps(data)
+
+    return Response(response, mimetype='application/json')
 
 
 # Receives json file where you put filter ej:  "Crypto_Name": "bitcoin" will return all documents of bitcoin

@@ -16,7 +16,7 @@ import { NftTransactions } from 'src/app/interfaces/nftTransaction.interface';
     providedIn: 'root'
   })
 export class CryptoService {
-    apiURL = 'http://192.168.1.138:5000/';
+    apiURL = 'http://localhost:5000/';
     crypto !: CryptoSymbol;
 
     constructor(private client : HttpClient, private cookies: CookieService){}
@@ -56,5 +56,13 @@ export class CryptoService {
 
             return this.client.post(URL, body, {'headers': headers});
 
+        }
+        addNFT(_user : User):Observable<any>
+        {
+            const body = JSON.stringify(_user);
+            const headers = {'Content-type': 'application/json'};
+            let URL = this.apiURL + 'setNFT';
+
+            return this.client.post(URL, body, {'headers': headers});
         }
     }
