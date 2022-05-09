@@ -161,6 +161,7 @@ def getTransactions():
             "user": transaction['user'],
             "crypto": transaction['crypto'],
             "price": transaction['price'],
+            "symbol": "€",
             "date": transaction['date']
         }
     response = json_util.dumps(data)
@@ -228,6 +229,7 @@ def createNFTTransaction():
     _s_username = request.json['seller']    # Seller´s username
     _NFT = request.json['NFT']
     _value = request.json['price']          # Buy Value
+    _symbol = request.json['symbol']
 
     now = datetime.now()
     # dd/mm/YY H:M:S
@@ -240,6 +242,7 @@ def createNFTTransaction():
             "seller": _s_username,
             "NFT": _NFT,
             "price": _value,
+            "symbol": _symbol,
             "date": dt_string
         }
     )
