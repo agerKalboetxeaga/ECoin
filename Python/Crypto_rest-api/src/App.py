@@ -76,6 +76,7 @@ def login():
 
     result = collection.find({"email": _email})
 
+    sendData = {}
     if result is not None:
         for user in result:
             if user["pass"] == _passHash:
@@ -152,7 +153,7 @@ def setUser():
 @app.route('/getCryptoTransactions', methods=['GET'])
 def getCTransactions():
     collection = client.db['transactions']
-    transactions = collection.find()
+    transactions = collection.find({}).sort("date")
     transactionArray = []
 
     for transaction in transactions:
@@ -160,7 +161,7 @@ def getCTransactions():
         data = {
             "id": _id,
             "user": transaction['user'],
-            "crypto": transaction['crypto'],
+            "crypto": transaction['crypto']['name'],
             "price": transaction['price'],
             "date": transaction['date']
         }
@@ -172,7 +173,7 @@ def getCTransactions():
 @app.route('/getNFTTransactions', methods=['GET'])
 def getNTransactions():
     collection = client.db['NFTtransactions']
-    transactions = collection.find()
+    transactions = collection.find({}).sort("date")
 
     for transaction in transactions:
         _id = str(transaction['_id'])
@@ -185,6 +186,43 @@ def getNTransactions():
             "date": transaction['date']
         }
     response = json_util.dumps(data)
+    return Response(response, mimetype='application/json')
+
+@app.route('/getNFTs', methods=['GET'])
+def getNFTs():
+    collection = client.db['nfts']
+    nfts = collection.find()
+    nftArray = []
+
+    for nft in nfts:
+        data = {
+        "id": nft['id'],
+        "name": nft['name'],
+        "creator": nft['creator'],
+        "price": nft['price'],
+        "symbol": nft['symbol'],
+        "img": nft['img']
+        }
+        nftArray.append(data)
+
+    response = json_util.dumps(nftArray)
+    return Response(response, mimetype='application/json')
+
+@app.route('/getNFT/<nft_id>', methods=['GET'])
+def getNFT(nft_id):
+    collection= client.db['nfts']
+    nft = collection.find({"id":nft_id})
+    for n in nft:
+        data = {
+            "id": n['id'],
+            "name": n['name'],
+            "creator": n['creator'],
+            "price": n['price'],
+            "symbol": n['symbol'],
+            "img" : n['img']
+        }
+    response = json_util.dumps(data)
+
     return Response(response, mimetype='application/json')
 
 
@@ -229,8 +267,9 @@ def changePassword():
 #   Para las compras
 @app.route('/setNFT', methods=['POST'])
 def setNFT():
-    _username = request.json['email']
-    _NFT = request.json['nft']
+    _username = request.json['user']['email']
+    _NFT = request.json['user']['nft']
+    _nft = request.json['nft']
 
     collection = client.db['users']
 
@@ -240,10 +279,16 @@ def setNFT():
             "$set": {"NFT": _NFT}
         }
     )
+    collection = client.db['nfts']
+
+    nft = collection.insert_one(
+        _nft
+    )
     response ={
         "guud":"shit"
     }
     return response
+
 
 @app.route('/createNFTTransaction', methods=['POST'])
 def createNFTTransaction():
@@ -283,8 +328,8 @@ def add_crypto():
     # y luego en body vas a raw y escribe un json. si funciona en la consola se tendria k printearance
     # (Funciona)
 
-    c_name = request.json['Crypto_Name']  # solana
-    c_symbol = request.json['Crypto_Symbol']  # sol
+    c_name = request.json['name']  # solana
+    c_symbol = request.json['symbol']  # sol
 
     if c_name and c_symbol:
 
@@ -428,7 +473,7 @@ def runscript():
 
 #vamosss porfin funciona. si mandas un json {"command": "run"} will launch the actualizer in the background.
 #else if you send {"command": "stop"} it will stop the program
-@app.route('/startexe', methods=['POST'])
+@app.route('/startprogram', methods=['POST'])
 def runEXE():
     response = {'message': ''}
     global process

@@ -1,20 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
-import { CryptoSymbol } from 'src/app/interfaces/Crypto.interface';
 import { User } from 'src/app/interfaces/user.interface';
-import { NFTModel } from 'src/app/models/nft.model';
-import { NftCreator } from 'src/app/models/nftCreator.model';
+import { CryptoSymbolModel } from 'src/app/models/cryptoSymbol.model';
 import { CryptoService } from 'src/app/shared/components/services/cryptoService.service';
 import { LoginService } from 'src/app/shared/components/services/loginService.service';
-
-
-/*
-
-    Ruta:
-        http://localhost:4200/idoia-apruebanos-porfi
-
-                      */
 
 @Component({
   selector: 'app-add-crypto-form',
@@ -23,78 +13,37 @@ import { LoginService } from 'src/app/shared/components/services/loginService.se
 })
 export class AddCryptoFormComponent implements OnInit {
 
-  selectedImg !:File;
-  img : any;
   user !: User;
-  cryptoCurrency : any;
-  select : any;
 
-
-  constructor( private cryptoSvc : CryptoService,
-    private router : Router, private loginSvc : LoginService ) { }
+  constructor(private loginSvc : LoginService,
+    private cryptoSvc : CryptoService,
+    private router : Router) { }
 
   ngOnInit(): void {
 
-    this.cryptoSvc.getSymbols().pipe(
-      tap((symbols : CryptoSymbol[]) => {
-        this.setItems(symbols)
-      } )
-    ).subscribe();
-    
     this.loginSvc.getUser(this.loginSvc.getToken()).pipe(
-      tap((u : User) => this.user = u)
+      tap((_user : User) => this.user = _user)
     ).subscribe();
 
-    
-
-
-
   }
-  setItems(_symbols : CryptoSymbol[]) : void {
-    let symbols =(<HTMLSelectElement> document.getElementById("cypto_symbol"));
 
-   _symbols.forEach(symbol => {
-      
-      let option = document.createElement('option');
-      option.text = symbol.name;
-      option.value = symbol.symbol;
-      symbols.options.add(option);
-      
-    });
-    this.cryptoCurrency = symbols.options;
-    this.select = symbols;
 
-  }
-  onFileSelected(event : any){
+  addCryptoSymbol(){
+    let _cryptoName = (<HTMLInputElement> document.getElementById("crypto_name")).value;
+    let _cryptoSymbol = (<HTMLInputElement> document.getElementById("crypto_symbol")).value;
 
-    this.selectedImg = event.target.files[0];
+    if(_cryptoName !== "" && _cryptoSymbol!== "")
+    if(Number(_cryptoName)!==NaN && Number(_cryptoSymbol)!==NaN){  //No es numero
 
-    let myReader : FileReader = new FileReader();
+      let newCryptoSymbol = new CryptoSymbolModel(_cryptoName, _cryptoSymbol);
 
-    myReader.onloadend = (e) => {
-      this.img = myReader.result; //this.img se manda
+
+      this.cryptoSvc.addCryptoSymbol(newCryptoSymbol).pipe(tap ((x:any)=> alert("crypto Component Added"))).subscribe();
+      this.router.navigate(['/main']);
     }
 
- 
-  }
-  addNFT(){
-    let _name = (<HTMLInputElement> document.getElementById("nft_name")).value;
-    let _creator = (<HTMLInputElement> document.getElementById("nft_creator")).value;
-    let _price = (<HTMLInputElement> document.getElementById("nft_price")).value;
- 
-    //let _cryptocurrency = select.options[select.selectedIndex].value;
-    let _img = this.img;
-    console.log("crypt: " + this.select.selectedIndex);
-    let nft = new NFTModel(Math.floor(Math.random() * 999999999999999).toString(), _name, _creator, parseFloat(_price), this.cryptoCurrency[this.select.selectedIndex].value, _img);
-    this.user.nft?.push(nft);
 
     
-
-    this.cryptoSvc.addNFT(this.user).subscribe();
-
-    this.router.navigate(['/main']);
-
-     
   }
 
 }

@@ -28,13 +28,19 @@ export class LoginComponent implements OnInit {
   login (_user : UserMaker){
     this.loginService.login(_user)
     .subscribe(({data}) => {
-
-      this.loginService.setToken(data.token);
+      console.log("token =>" + data.token)
+      if(typeof data.token === 'string'){
+        this.loginService.setToken(data.token);
 
 
       this.loginService.userEmail = _user.email;
-
       this.router.navigate(['/main']);
+      }else{
+        alert("invalid username or email");
+      }
+      
+
+      
     });
     
 

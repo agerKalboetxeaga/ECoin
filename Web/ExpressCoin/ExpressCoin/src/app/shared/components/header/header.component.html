@@ -11,7 +11,7 @@
     </button>
     <div class="container">
         <!-- Begin Logo -->
-        <a  href="/index">
+        <a  href="/main">
             <img style="max-width: 30px;" src="assets/images/express_coin_icon.jpg" alt="express_coin"  ></a>
             <a style="font-size: medium; margin-left: 10px;" class="navbar-brand" href="index.html">Express Coin</a>
         
@@ -21,10 +21,10 @@
             <!-- Begin Menu -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                <a class="nav-link" href="/index">Latest Transactions</a>
+                <a class="nav-link" href="/transactions">Latest Transactions</a>
                 </li>
                 <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Market</a>
+                <a class="nav-link dropdown-toggle"href="/no-fungible-tokens" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Market</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="/cryptocurrencies">Cryptocurrencies</a>
                     <a class="dropdown-item" href="/no-fungible-tokens">NFTs</a>
@@ -50,6 +50,14 @@
                 </li>
                 <li class="naav-item " >
                     <a class="nav-link" href="/register">Registrar</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto" id="enLaEsquina">
+                <li class="nav-item" >
+                    <button class="nav-link" (click)="startEXE()">Start updater</button>
+                </li>
+                <li class="naav-item " >
+                    <button class="nav-link" (click)="stopEXE()">Stop Updater</button>
                 </li>
             </ul>
         </div>

@@ -1,0 +1,21 @@
+
+
+
+<div class="top-div">
+    <h1> TRANSACCIONES </h1>
+    <section class="transaction-section">
+       <app-nft-transactions
+       [nftTransaction]="nftTransaction"
+       *ngFor="let nftTransaction of nftTransactions">
+        </app-nft-transactions>
+    </section>
+    <section class="transaction-section">
+        <app-crypto-transactions
+        [cryptoTransaction]="cryptoTransaction"
+        *ngFor="let cryptoTransaction of cryptoTransactions">
+
+
+        </app-crypto-transactions>
+    </section>
+</div>
+    

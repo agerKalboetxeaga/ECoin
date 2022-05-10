@@ -1,6 +1,6 @@
 export interface CryptoTransactions{
     id : string;
-    buyer : string;
+    user : string;
     crypto : string | null;
     price : number;
     date : string;

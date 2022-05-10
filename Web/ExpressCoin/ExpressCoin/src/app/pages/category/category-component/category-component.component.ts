@@ -13,6 +13,9 @@ export class CategoryComponentComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    if (this.cryptoSymbol.symbol=="null"){
+      this.cryptoSymbol.symbol = "";
+    }
   }
 
 

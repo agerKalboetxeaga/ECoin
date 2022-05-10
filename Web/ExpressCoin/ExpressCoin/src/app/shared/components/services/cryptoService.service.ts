@@ -11,13 +11,18 @@ import { Cryptoo } from 'src/app/interfaces/cryptocurrency.interface';
 import { BuyCrypto } from 'src/app/models/buyCrypto.model';
 import { CryptoTransactions } from 'src/app/interfaces/transactions.interface';
 import { NftTransactions } from 'src/app/interfaces/nftTransaction.interface';
+import { CryptoSymbolModel } from 'src/app/models/cryptoSymbol.model';
+import { RunEXECommand } from 'src/app/models/runExecommand.model';
+import { NFTUser } from 'src/app/models/createNFTandUser.model';
+import { NFT } from 'src/app/interfaces/nft.interface';
 
 @Injectable({
     providedIn: 'root'
   })
 export class CryptoService {
-    apiURL = 'http://localhost:5000/';
+    apiURL = 'http://192.168.6.151:5000/';
     crypto !: CryptoSymbol;
+    nftID !: string;
 
     constructor(private client : HttpClient, private cookies: CookieService){}
 
@@ -57,12 +62,38 @@ export class CryptoService {
             return this.client.post(URL, body, {'headers': headers});
 
         }
-        addNFT(_user : User):Observable<any>
+        addNFT(_user : NFTUser):Observable<any>
         {
             const body = JSON.stringify(_user);
             const headers = {'Content-type': 'application/json'};
             let URL = this.apiURL + 'setNFT';
 
             return this.client.post(URL, body, {'headers': headers});
+        }
+        addCryptoSymbol(_cryptoSymbol : CryptoSymbolModel): Observable<any>
+        {
+            const body = JSON.stringify(_cryptoSymbol);
+            const headers = {'Content-type': 'application/json'};
+            let URL = this.apiURL + 'addcrypto';
+            
+            return this.client.post(URL, body, {'headers': headers});
+        }
+        startEXE(command : RunEXECommand): Observable<any>
+        {
+            const body = JSON.stringify(command);
+            const headers = {'Content-type': 'application/json'};
+            let URL = this.apiURL + 'startprogram';
+
+            return this.client.post(URL, body, {'headers': headers});
+        }
+        getNFT(nft_id : string):Observable<NFT>
+        {
+            let URL = this.apiURL + "getNFT/" + nft_id;
+            return this.client.get<NFT>(URL);
+        }
+        getNFTs():Observable<NFT[]>
+        {
+            let URL = this.apiURL + "getNFTs";
+            return this.client.get<NFT[]>(URL);
         }
     }

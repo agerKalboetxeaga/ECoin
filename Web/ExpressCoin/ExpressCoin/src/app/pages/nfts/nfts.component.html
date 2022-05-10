@@ -1,1 +1,12 @@
-<p>nfts works!</p>
+<div class="container">
+    <section>
+        <app-nft-component
+        (comprarNFT)="buyNFT($event)"
+        [nft]="nft"
+        *ngFor="let nft of nfts"
+
+></app-nft-component>
+    </section>
+
+
+</div>
