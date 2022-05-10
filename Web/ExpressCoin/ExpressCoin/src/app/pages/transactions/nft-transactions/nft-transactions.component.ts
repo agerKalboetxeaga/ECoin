@@ -11,10 +11,12 @@ import { CryptoService } from 'src/app/shared/components/services/cryptoService.
 export class NftTransactionsComponent implements OnInit {
 
   @Input() nftTransaction !: NftTransactions;
+  
   constructor(private cryptoSvc : CryptoService,
     private router : Router) { }
 
   ngOnInit(): void {
+    console.log("nft:" + this.nftTransaction.buyer)
   }
   goBuyNFT(){
      // @ts-ignore: Object is possibly 'null'.

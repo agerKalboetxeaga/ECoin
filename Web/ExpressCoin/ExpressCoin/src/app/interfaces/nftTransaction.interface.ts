@@ -5,5 +5,5 @@ export interface NftTransactions{
     seller : string;
     NFT : NFT;
     price : number;
-    date : string | null;
+    date : string;
 }

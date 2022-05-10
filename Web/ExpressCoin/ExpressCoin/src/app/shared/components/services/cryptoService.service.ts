@@ -96,4 +96,13 @@ export class CryptoService {
             let URL = this.apiURL + "getNFTs";
             return this.client.get<NFT[]>(URL);
         }
+        
+        buyNFT(_data : NFTUser): Observable<any>
+        {
+            const body = JSON.stringify(_data);
+            const headers = {'Content-type': 'application/json'};
+            let URL = this.apiURL + 'buyNFT';
+
+            return this.client.post(URL, body, {'headers': headers});
+        }
     }

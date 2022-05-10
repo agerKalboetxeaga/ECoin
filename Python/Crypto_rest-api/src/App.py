@@ -238,7 +238,7 @@ def getUser(_u_username):
             "name": u['name'],
             "role": u['role'],
             "nft": u['NFT'],
-            "crypto": u['Cryptos']
+            "cryptos": u['Cryptos']
         }
     reresponse = json_util.dumps(response)
     return Response(reresponse, mimetype='application/json')
@@ -286,6 +286,67 @@ def setNFT():
     )
     response ={
         "guud":"shit"
+    }
+    return response
+
+
+@app.route('/buyNFT', methods=['POST'])
+def buyNFT():
+    _user = request.json['user']
+    _nft = request.json['nft']
+
+    # find nft owner
+    collection = client.db['users']
+    users = collection.find()
+
+    for user in users:
+        if user['username'] != _user['username']:
+
+            userNFT = []
+
+            for nft in user['NFT']:
+                if nft["id"] != _nft['id']:     # Con esto quitamos el nft del sitio anterior en donde estaba
+                    userNFT.append(nft)
+                else:
+                    seller = user['username']   # if nft matches means that this user is the current owner
+            _insertion = collection.find_one_and_update(
+                {"username": user['username']},
+                {
+                    "$set": {"NFT": userNFT}        # guardamos los nft sin el que se ha vendido
+                }
+            )
+        else:
+            _insertion = collection.find_one_and_update(
+                {"username": _user['username']},
+                {
+                    "$set": {"NFT":_user['nft']}# Teniendo en cuenta que el array de nfts del usuario ya tiene el nuevo nft
+                }
+            )
+            _insertion = collection.find_one_and_update(
+                {"username": _user['username']},
+                {
+                    "$set": {"Cryptos": _user['cryptos']}       #El valor de las cryptos despues de la compra
+
+                }
+            )
+
+            # Ahora hacemos una transaccion donde se reflejan los datos que hemos manejado
+    now = datetime.now()
+    # dd/mm/YY H:M:S
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    collection = client.db['NFTtransactions']
+    _insertion = collection.insert_one(
+        {
+            "buyer" : _user['username'],
+            "seller": seller,
+            "NFT": _nft,
+            "price": _nft['price'],
+            "date": dt_string
+        }
+    )
+    response = {
+        "message": "todo a funcionau?"
+
     }
     return response
 

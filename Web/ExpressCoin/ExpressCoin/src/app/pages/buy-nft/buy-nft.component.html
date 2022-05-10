@@ -1,1 +1,10 @@
-<p>buy-nft works!</p>
+<div class="container">
+    <h1>NFT {{nft.name}}</h1>
+    <section class="buyChart">
+        <img class="img-fluid" [src]="imagePath" alt="imagen en base64">
+        <label>Valor {{nft.price}} ({{nft.symbol}})</label><br>
+        <label>La mente maestra: {{nft.creator}}</label><br>
+        <button (click)="buyNFT()">Comprar</button> 
+
+    </section>
+</div>
