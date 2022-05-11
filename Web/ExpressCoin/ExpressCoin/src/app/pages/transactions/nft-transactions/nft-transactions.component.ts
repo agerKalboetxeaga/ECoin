@@ -20,7 +20,7 @@ export class NftTransactionsComponent implements OnInit {
   }
   goBuyNFT(){
      // @ts-ignore: Object is possibly 'null'.
-    this.cryptoSvc.nftID = this.nftTransaction.NFT.id;
+    this.cryptoSvc.nftID = this.nftTransaction.nft.id;
 
     this.router.navigate(['/buy-nfts']);
   }

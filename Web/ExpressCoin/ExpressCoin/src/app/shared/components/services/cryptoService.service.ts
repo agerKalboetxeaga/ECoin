@@ -20,7 +20,7 @@ import { NFT } from 'src/app/interfaces/nft.interface';
     providedIn: 'root'
   })
 export class CryptoService {
-    apiURL = 'http://192.168.6.151:5000/';
+    apiURL = 'http://localhost:5000/';
     crypto !: CryptoSymbol;
     nftID !: string;
 

@@ -1,12 +1,15 @@
 <div class="container">
-    <h1>Insert Crypto</h1><br>
+    <h1 class="h1-style"><u>Insert Cryptocurrency</u></h1>
     <div>
-        <label>Crypto Name ==> </label>
-        <input type="text" id="crypto_name" placeholder="bitcoin"><br>
-
-        <label>Crypto symbol </label>
-        <input  type="text" id="crypto_symbol" placeholder="btc"><br>
-
-        <button (click)="addCryptoSymbol()">Añadir!</button>
+        <div class="first-div">
+            <h2 class="h2-style">Cryptocurrency Name</h2>
+            <input class="input-style" type="text" id="crypto_name" placeholder="bitcoin"><br>
+        </div>
+        <div class="second-div">
+            <h2 class="h2-style">Cryptocurrency Symbol</h2>
+            <input  class="input-style"  type="text" id="crypto_symbol" placeholder="btc"><br>
+        </div>
+        <button class="mrg-bottom" (click)="addCryptoSymbol()">Añadir</button>
     </div>
 </div>
+

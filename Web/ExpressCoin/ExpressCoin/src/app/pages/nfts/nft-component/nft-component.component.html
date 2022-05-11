@@ -2,26 +2,25 @@
 <div class="col-md-6 grid-item">
     <div class="card">
         <a href="single.html">
-        <img class="img-fluid" [src]="imagePath" alt="imagen en base64">
         </a>
-        <div class="card-block">
-            <h2 class="card-title"><a (click)="onClick()">{{nft.name}}</a></h2>
-            <h4 class="card-text">{{nft.creator}}</h4>
-            <div class="metafooter">
-                <div class="wrapfooter">
-                    <span class="meta-footer-thumb">
-                    <img class="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&d=mm&r=x" alt="Sal">
-                    </span>
-                    <span class="author-meta">
-                    <span class="post-name"><a target="_blank" href="#">{{nft.symbol}}</a></span><br/>
-                    <span class="post-date">{{nft.price}}</span>
-                    </span>
-                    <span class="post-read-more"><a (click)="onClick()" title="Buy"><i class="fa fa-link"></i></a></span>
-                    <div class="clearfix">
-                    </div>
-                </div>
+                <table>
+                    <tr>
+                      <th>NFT name</th>
+                      <th>NFT Author</th>
+                      <th>NFT Image</th>
+                      <th>Purchase crypto</th>
+                      
+                      <th>Price</th>
+                    </tr>
+                    <tr>
+                      <td class="capitalize">{{nft.name.toLocaleUpperCase()}}</td>
+                      <td class="capitalize">{{nft.creator.toLocaleUpperCase()}}</td>
+                      <td class="capitalize">{{nft.symbol.toUpperCase()}}</td>
+                      <td class="capitalize"><img class="img-fluid" id="putafoto" src="{{nft.img}}" alt="imagen en base64"></td>
+                      <td style=" padding-left: 40px;">{{nft.price}} ({{nft.symbol}})
+                        <span class="post-read-more"><a (click)="onClick()" title="Buy"><i class="fa fa-link"></i></a></span>
+                    </tr>
+                </table>
             </div>
         </div>
-    </div>
-</div>
 <!-- end post -->

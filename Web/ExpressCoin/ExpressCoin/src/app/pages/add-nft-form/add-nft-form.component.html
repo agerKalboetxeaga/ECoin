@@ -5,26 +5,32 @@
 
                                                         -->
 
-
-
 <div class="container">
-    <h1>CREATE A NFT</h1><br>
+    <h1 class="h1-style"><u>CREATE A NFT</u></h1>
     <div>
-        <label>NFT Name ==> </label>
-        <input type="text" id="nft_name" placeholder="Nombre"><br>
-
-        <label>Creator</label>
-        <input  type="text" id="nft_creator" placeholder="creador"><br>
-
-        <label> Price </label>
-        <input  type="text" id="nft_price" placeholder="price"><br>
-
-        <label> CryptoCurrency </label>
-        <select id="cypto_symbol"></select><br>
-
-        <label> Image </label>
-    <img [src]="imagePath">
-        <input  type="file" id="nft_img" (change)="onFileSelected($event)"><br>
-        <button (click)="addNFT()">Añadir!</button>
+        <div class="first-div">
+            <h2 class="h2-style">NFT Name</h2>
+            <input class="input-style" type="text" id="nft_name" placeholder="Nombre"><br>
+        </div>
+        <div class="second-div">
+            <h2 class="h2-style">NFT Creator</h2>
+            <input  class="input-style"  type="text" id="nft_creator" placeholder="Author"><br>
+        </div>
+        <div class="second-div">
+            <h2 class="h2-style">NFT Price</h2>
+            <input  class="input-style"  type="text" id="nft_price" placeholder="Price"><br>
+        </div>
+        <div class="second-div">
+            <h2 class="h2-style">Purchase Cryptocurrency</h2>
+            <select id="cypto_symbol"></select><br>
+        </div>
+        <div class="second-div">
+            <h2 class="h2-style">Image</h2>
+            <img [src]="imagePath">
+            <input  type="file" id="nft_img" (change)="onFileSelected($event)"><br>
+        </div>
+        <button class="mrg-bottom" (click)="addNFT()">Añadir</button>
     </div>
 </div>
+
+

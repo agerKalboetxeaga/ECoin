@@ -6,6 +6,7 @@ import { NftsComponent } from './nfts.component';
 import { NftComponentComponent } from './nft-component/nft-component.component';
 
 
+
 @NgModule({
   declarations: [
     NftsComponent,

@@ -14,12 +14,16 @@ export class CategoryComponentComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.cryptoSymbol.symbol=="null"){
-      this.cryptoSymbol.symbol = "";
+      this.cryptoSymbol.symbol = "-";
     }
   }
 
 
   onClick(): void{
+    //#miedo
+    this.cryptoSymbol.id.toLocaleLowerCase();
+    this.cryptoSymbol.name.toLocaleLowerCase();
+    this.cryptoSymbol.symbol.toLocaleLowerCase();
     this.comprarCrypto.emit(this.cryptoSymbol);
   }
 }

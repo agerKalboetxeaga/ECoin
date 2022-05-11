@@ -174,18 +174,19 @@ def getCTransactions():
 def getNTransactions():
     collection = client.db['NFTtransactions']
     transactions = collection.find({}).sort("date")
+    transactionList = []
 
     for transaction in transactions:
         _id = str(transaction['_id'])
         data = {
-            "id": _id,
             "buyer": transaction['buyer'],
             "seller": transaction['seller'],
-            "NFT": transaction['NFT'],
+            "nft": transaction['NFT'],
             "price": transaction['price'],
             "date": transaction['date']
         }
-    response = json_util.dumps(data)
+        transactionList.append(data)
+    response = json_util.dumps(transactionList)
     return Response(response, mimetype='application/json')
 
 @app.route('/getNFTs', methods=['GET'])

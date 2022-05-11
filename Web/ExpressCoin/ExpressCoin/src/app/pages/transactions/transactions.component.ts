@@ -18,13 +18,19 @@ export class TransactionsComponent implements OnInit {
   constructor(private cryptoSvc : CryptoService) { }
 
   ngOnInit(): void {
+    this.cryptoSvc.getNFTTransactions().pipe(
+      tap ((_nftTransactions : NftTransactions[]) => {this.nftTransactions =(<NftTransactions[]> _nftTransactions);
+      _nftTransactions.forEach(transaction => console.log(transaction))})
+    ).subscribe();
+    
+    
+    
     this.cryptoSvc.getCryptoTransactions().pipe(
       tap((_cryptoTransactions : CryptoTransactions[]) => this.cryptoTransactions = _cryptoTransactions)
     ).subscribe();
 
-    this.cryptoSvc.getNFTTransactions().pipe(
-      tap ((_nftTransactions : NftTransactions[]) => this.nftTransactions = _nftTransactions)
-    ).subscribe();
+    
+    
   }
   
 
