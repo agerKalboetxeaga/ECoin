@@ -153,7 +153,7 @@ def setUser():
 @app.route('/getCryptoTransactions', methods=['GET'])
 def getCTransactions():
     collection = client.db['transactions']
-    transactions = collection.find({}).sort("date")
+    transactions = collection.find({},sort=[('_id', -1)])
     transactionArray = []
 
     for transaction in transactions:
@@ -173,7 +173,7 @@ def getCTransactions():
 @app.route('/getNFTTransactions', methods=['GET'])
 def getNTransactions():
     collection = client.db['NFTtransactions']
-    transactions = collection.find({}).sort("date")
+    transactions = collection.find({},sort=[('_id', -1)])
     transactionList = []
 
     for transaction in transactions:
@@ -451,7 +451,7 @@ def not_found(error=None):
 @app.route('/getcryptos', methods=["GET"])
 def showAllCryptos():
     collection = client.db['cryptos']
-    cryptos = collection.find()
+    cryptos = collection.find({},sort=[('_id', -1)])
     cryptoArray = []
 
     for crypt in cryptos:
