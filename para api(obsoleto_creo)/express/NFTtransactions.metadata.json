@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"e09651aae1e04df6b4460032502c6e81","collectionName":"NFTtransactions","type":"collection"}
