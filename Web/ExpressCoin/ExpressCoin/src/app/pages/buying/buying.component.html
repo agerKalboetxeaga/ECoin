@@ -1,9 +1,9 @@
 <div class="top-div">
-    <h1> COMPRAR {{cryptoSymbol.name}}</h1>
+    <h1><u> COMPRAR {{cryptoSymbol.name}}</u></h1>
     <section class="buyChart">
-        <label>Cuantos {{cryptoSymbol.name}} quieres comprar?</label><br>
-        <label>{{crypto.price}}€</label><br>
-        <input type="text" id="_moneyInput" placeholder="€"><br>
+        <label><i>Cuantos {{cryptoSymbol.name}} quieres comprar?</i></label><br>
+        <label style="color: red;">{{crypto.price}}€</label><br>
+        <input type="text" id="_moneyInput" placeholder="€"><br><br>
         <button (click)="comprar(user,cryptoSymbol)">Comprar</button> 
     </section>
 </div>

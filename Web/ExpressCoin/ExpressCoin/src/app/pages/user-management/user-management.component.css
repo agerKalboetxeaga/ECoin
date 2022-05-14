@@ -1,0 +1,18 @@
+.container{
+    margin-top:7%;
+    margin-left: 40%;
+    border: 2px solid rgb(75, 207, 71);
+    padding: 10px;
+    border-radius: 25px;
+    max-width: 15%;
+}
+
+.button-style{
+    display: inline;
+}
+
+input {
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: rgb(0, 0, 0)
+  } 

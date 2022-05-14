@@ -1,11 +1,14 @@
-<div><br><br><br><br><br><br>
-
+<div class="container">
+   
     <h2>
         CAMBIAR CONTRASEÑA
-    </h2>
+    </h2> 
+    
     <section>
-        <input type="password" id="_newPass" placeholder="nueva contraseña">
-        <button (click)="changePassword()">Aceptar</button>
-        <button (click)="logOut()"> Log Out</button>
+        <input style="margin-right: 1%;" type="password" id="_newPass" placeholder="Nueva contraseña">
+        <div class="button-style">
+            <span class="post-read-more"><a (click)="logOut()" title="Log Out"><i class="fa fa-sign-out"></i></a></span>
+            <span class="post-read-more"><a (click)="changePassword()" title="Aceptar"><i class="fa fa-check-circle"></i></a></span>
+       </div>
     </section>
 </div>

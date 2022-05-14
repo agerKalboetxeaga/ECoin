@@ -1,9 +1,12 @@
 <div class="container">
-    <h1>NFT {{nft.name}}</h1>
+    <h1><b>NFT {{nft.name}}</b></h1>
     <section class="buyChart">
         <img class="img-fluid" src="{{nft.img}}" alt="imagen en base64">
-        <label>Valor {{nft.price}} ({{nft.symbol}})</label><br>
-        <label>La mente maestra: {{nft.creator}}</label><br>
+        <br><br>
+        <label><b>Valor: </b></label><br>
+        <a style="margin-left: 20%;"> {{nft.price}} ({{nft.symbol}})</a><br><br>
+        <label><b>Creator: </b></label><br>
+        <a style="margin-left: 10.5%;">{{nft.creator}}</a><br><br>
         <button (click)="buyNFT()">Comprar</button> 
 
     </section>

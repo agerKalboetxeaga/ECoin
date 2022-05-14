@@ -1,4 +1,22 @@
 .top-div{
     margin-top: 10%;
+    margin-left: 35%;
+    text-align: center;
+    display: block;
+    text-align: center;
+    border: 5px solid rgb(32, 143, 218);
+    padding: 10px;
+    border-radius: 25px;
+    font-size: 18px;
+    text-transform: uppercase;
+    max-width: 30%;
+}
+
+input{
+    border-radius: 25px;
+    border-color: rgba(0, 0, 0, 0.103);
+}
+
+input:focus{
     text-align: center;
 }

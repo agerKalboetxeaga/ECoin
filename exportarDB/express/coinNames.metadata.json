@@ -1,1 +1,1 @@
-{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"375cb76db9aa457ca235fdfe55f15a66","collectionName":"coinNames","type":"collection"}
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"974b38f2510e4b1b9cfe262d9a67c0d2","collectionName":"coinNames","type":"collection"}

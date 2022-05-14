@@ -3,4 +3,12 @@
     display: block;
     top: 20%;
     text-align: center;
+    border: 5px solid rgb(32, 143, 218);
+    padding: 10px;
+    border-radius: 25px;
+    font-size: 18px;
+    text-transform: uppercase;
+    max-width: 30%;
 }
+
+

@@ -1,17 +1,17 @@
 
 <div class="top-div">
-    <h1> NFT TRANSACTIONS </h1>
-    <section class="show">
-        <label>{{nftTransaction.nft.name}}</label><br>
-        <label>Price : {{nftTransaction.price}}</label><br>
-        <label>Buyer : {{nftTransaction.buyer}}</label><br>
-        <label>Seller : {{nftTransaction.seller}}</label><br>
-        <label>date : {{nftTransaction.date}}</label><br>
-        <div>
-            <label>NFT:</label><br>
+    
+    <div class="show section-style">
+        <label class="label-title"><u>{{nftTransaction.nft.name}}</u></label><br>
+        <label><b>Price : </b>{{nftTransaction.price}}</label><br>
+        <label><b>Buyer : </b>{{nftTransaction.buyer}}</label><br>
+        <label><b>Seller : </b>{{nftTransaction.seller}}</label><br>
+        <label><b>Date : </b>{{nftTransaction.date}}</label><br><br>
+        <div class="section-style1">
+            <label><b>NFT</b></label><br>
             <label>Name : {{nftTransaction.nft.name}}</label><br>
             <label>NFT-ID : <a (click)="goBuyNFT()">{{nftTransaction.nft.id}}</a></label>
         </div>
        
-    </section>
+    </div>
 </div>
