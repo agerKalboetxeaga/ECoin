@@ -248,7 +248,7 @@ def getUser(_u_username):
 @app.route('/changePassword', methods=['POST'])
 def changePassword():
     _email = request.json['email']
-    _newPass = request.json['newPass']
+    _newPass = request.json['pass']
 
     collection = client.db['users']
 

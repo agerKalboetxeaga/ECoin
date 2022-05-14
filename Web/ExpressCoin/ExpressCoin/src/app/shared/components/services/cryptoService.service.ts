@@ -105,4 +105,12 @@ export class CryptoService {
 
             return this.client.post(URL, body, {'headers': headers});
         }
+        changePass(_data : User): Observable<any>
+        {
+            const body = JSON.stringify(_data);
+            const headers = {'Content-type': 'application/json'};
+            let URL = this.apiURL + 'changePassword';
+
+            return this.client.post(URL, body, {'headers': headers});
+        }
     }

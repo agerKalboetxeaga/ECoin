@@ -50,7 +50,9 @@ const routes: Routes = [
      loadChildren: () => import('./pages/buy-nft/buy-nft.module').then(m => m.BuyNFTModule),
     canActivate : [UserGuardGuard]
     },
-    { path: 'user-management', loadChildren: () => import('./pages/user-management/user-management.module').then(m => m.UserManagementModule) },
+    { path: 'user-management', loadChildren: () => import('./pages/user-management/user-management.module').then(m => m.UserManagementModule),
+    canActivate : [UserGuardGuard]
+    },
     { path: '**', redirectTo: '', pathMatch:'full'}  
    ];
 
