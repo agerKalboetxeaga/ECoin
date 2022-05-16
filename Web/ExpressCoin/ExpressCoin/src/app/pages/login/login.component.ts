@@ -12,6 +12,7 @@ import { LoginService } from 'src/app/shared/components/services/loginService.se
 })
 export class LoginComponent implements OnInit {
 
+  //Variable declaration
   user !: User;
   user_light !: UserMaker;
 
@@ -24,10 +25,16 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+  /**
+   * This is the login method and if the given email and password are correct
+   * the API will response with a token that we will use as cookie
+   * 
+   * @param _user user who attemps to login
+   */
   login (_user : UserMaker){
     this.loginService.login(_user)
     .subscribe(({data}) => {
+      //  if login is succesful 
       console.log("token =>" + data.token)
       if(typeof data.token === 'string'){
         this.loginService.setToken(data.token);

@@ -1,3 +1,4 @@
+//  Interface class
 export interface NFT {
 
     id : string | null;

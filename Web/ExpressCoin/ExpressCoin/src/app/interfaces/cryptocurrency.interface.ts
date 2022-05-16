@@ -1,3 +1,4 @@
+//  Interface class
 export interface Cryptoo{
     id : string;
     name : string;

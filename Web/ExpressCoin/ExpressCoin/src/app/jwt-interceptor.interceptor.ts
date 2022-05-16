@@ -8,7 +8,10 @@ import {
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-
+/**
+ * This class will manage the token access allowing the client to 
+ * access a certain page or view basado in his cookie
+ */
 @Injectable()
 export class JwtInterceptorInterceptor implements HttpInterceptor {
 

@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 
+// Logic class for cookie validation 
 @Injectable({
   providedIn: 'root'
 })

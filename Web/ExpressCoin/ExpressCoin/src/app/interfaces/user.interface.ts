@@ -1,6 +1,7 @@
 import { NFT } from "./nft.interface";
 import { CryptoSymbol } from "./Crypto.interface";
 
+//  Interface class
 export interface User {
     email: string;
     pass : string | null;

@@ -1,3 +1,4 @@
+//  Model class
 export class CryptoSymbolModel{
     name : string;
     symbol : string;

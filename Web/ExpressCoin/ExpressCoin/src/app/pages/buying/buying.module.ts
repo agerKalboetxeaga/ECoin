@@ -4,13 +4,11 @@ import { CommonModule } from '@angular/common';
 import { BuyingRoutingModule } from './buying-routing.module';
 import { BuyingComponent } from './buying.component';
 import { FormsModule } from '@angular/forms';
-import { BuyingViewComponent } from './buying-view/buying-view.component';
 
 
 @NgModule({
   declarations: [
-    BuyingComponent,
-    BuyingViewComponent
+    BuyingComponent
   ],
   imports: [
     CommonModule,

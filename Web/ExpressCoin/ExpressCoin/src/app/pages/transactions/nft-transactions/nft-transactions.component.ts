@@ -18,6 +18,9 @@ export class NftTransactionsComponent implements OnInit {
   ngOnInit(): void {
     console.log("nft:" + this.nftTransaction.buyer)
   }
+  /**
+   * Will "send" selected nft´s id and send to nft buying page
+   */
   goBuyNFT(){
      // @ts-ignore: Object is possibly 'null'.
     this.cryptoSvc.nftID = this.nftTransaction.nft.id;

@@ -1,5 +1,6 @@
 import { NFTModel } from "./nft.model";
 
+//  Model class
 export class NftCreator {
     username : string;
     NFT : NFTModel[];

@@ -11,6 +11,7 @@ import { CryptoService } from 'src/app/shared/components/services/cryptoService.
 })
 export class TransactionsComponent implements OnInit {
 
+  //  Variable declarations
   nftTransactions !: NftTransactions[];
   cryptoTransactions !: CryptoTransactions[];
 
@@ -18,13 +19,14 @@ export class TransactionsComponent implements OnInit {
   constructor(private cryptoSvc : CryptoService) { }
 
   ngOnInit(): void {
+    //  Getting all stored nft transactions
     this.cryptoSvc.getNFTTransactions().pipe(
       tap ((_nftTransactions : NftTransactions[]) => {this.nftTransactions =(<NftTransactions[]> _nftTransactions);
       _nftTransactions.forEach(transaction => console.log(transaction))})
     ).subscribe();
     
     
-    
+    //  Getting all stored crypto transactions
     this.cryptoSvc.getCryptoTransactions().pipe(
       tap((_cryptoTransactions : CryptoTransactions[]) => this.cryptoTransactions = _cryptoTransactions)
     ).subscribe();

@@ -6,7 +6,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { UserMaker } from 'src/app/models/user.model';
 import { Logresponse } from 'src/app/models/logresponse.model';
 import { LogResponseI } from 'src/app/interfaces/logresponse.interface';
-
+/**
+ * This service will take care of any user related API calls such as 
+ * logins and registers..
+ */
 @Injectable({
     providedIn: 'root'
   })
@@ -40,7 +43,11 @@ export class LoginService {
             return this.client.get<User>(URL);
         }
 
-
+        /**
+         * This method will take a string and using the cookieService 
+         * will set it as a cookie
+         * @param token API login response to set as cookie
+         */
         setToken(token : string) : void{
             this.cookies.set('token', token);
 

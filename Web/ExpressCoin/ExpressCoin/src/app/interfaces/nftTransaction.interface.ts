@@ -1,5 +1,6 @@
 import { NFT } from "./nft.interface";
 
+//  Interface class
 export interface NftTransactions{
     buyer : string;
     seller : string;

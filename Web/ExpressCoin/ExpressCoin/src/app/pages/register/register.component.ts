@@ -17,6 +17,10 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * This method will take a user and add it into the database
+   * @param _user New user for Register
+   */
   register(_user : UserMaker){
     this.loginService.register(_user).subscribe(data => {
       this.router.navigate(['/main']);

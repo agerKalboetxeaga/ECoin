@@ -17,11 +17,15 @@ export class NftsComponent implements OnInit {
     private cryptoSvc : CryptoService) { }
 
   ngOnInit(): void {
-
+    //  Getting all stored NFTs
     this.cryptoSvc.getNFTs().pipe(
       tap ((_nfts : NFT[]) => this.nfts = _nfts)
     ).subscribe();
   }
+  /**
+   * This method will take user selected nft and "send" it to nft buying component
+   * @param _nft selected nft to buy
+   */
   buyNFT(_nft : NFT){
      // @ts-ignore: Object is possibly 'null'.
     this.cryptoSvc.nftID= _nft.id;

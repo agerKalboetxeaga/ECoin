@@ -7,12 +7,14 @@ import { CryptoSymbol } from 'src/app/interfaces/Crypto.interface';
   styleUrls: ['./category-component.component.css']
 })
 export class CategoryComponentComponent implements OnInit {
+  // Variable declarations
   @Input() cryptoSymbol !: CryptoSymbol;
   @Output() comprarCrypto = new EventEmitter<CryptoSymbol>();
 
   constructor() { }
 
   ngOnInit(): void {
+    // Stetic things..
     if (this.cryptoSymbol.symbol=="null"){
       this.cryptoSymbol.symbol = "-";
     }
@@ -21,6 +23,7 @@ export class CategoryComponentComponent implements OnInit {
 
   onClick(): void{
     //#miedo
+    //already uppercase´d values to lowercase and emit them to the parent component
     this.cryptoSymbol.id.toLocaleLowerCase();
     this.cryptoSymbol.name.toLocaleLowerCase();
     this.cryptoSymbol.symbol.toLocaleLowerCase();

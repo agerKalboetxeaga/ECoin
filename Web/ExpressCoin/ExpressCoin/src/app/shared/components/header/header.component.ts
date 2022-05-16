@@ -17,18 +17,21 @@ export class HeaderComponent implements OnInit {
     private cookieSvc : CookieService) { }
 
   ngOnInit(): void {
-  
+    
+    //  Variable declaration
     let _register = (<HTMLElement> document.getElementById("_registrar"));
     let _login = (<HTMLAreaElement> document.getElementById("_login"));
     let _startexe = (<HTMLButtonElement> document.getElementById("startexe"));
     let _stopexe = (<HTMLButtonElement> document.getElementById("stopexe"));
     
-    
+    //  Cheching if user is logged
     let token = this.cookieSvc.get("token");
-    console.log("no puede ser: " + token)
+    //console.log("no puede ser: " + token)
+    //  if the token is set 
     if(token!= null || token!= undefined || token === ""){
-      console.log("polla");
-      
+  
+      //hide register and login options.
+      //show options to start/stop updater
       _register.style.display = "none";
       _register.style.visibility = "invisible";
       _startexe.style.display = "flex";
@@ -40,9 +43,9 @@ export class HeaderComponent implements OnInit {
       _login.textContent="User";
       _login.href="/user-management";
   
-
+      //if token is not set
     }if(token == ""){
-      console.log("entra?")
+     // console.log("entra?")
       _register.style.display = "flex";
       _register.style.visibility = "visible";
       _startexe.style.display = "none";
@@ -55,13 +58,20 @@ export class HeaderComponent implements OnInit {
       _login.href="/login";
     }
   }
-
+  /**
+   * This will give the order to run our cryptocurrencyes value updater on the API
+   * it will update and add new values of current cryptocurrencies on the database
+   */
   startEXE(){
 
     this.command.command = "run";
     this.cryptoSvc.startEXE(this.command).subscribe(x => alert("Crypto price updater started!"));
   
   }
+  /**
+   * This will send the order to stop the updater tool sending
+   *  a signal to the API to kill the previous process
+   */
   stopEXE(){
   
     this.command.command = "stop"
@@ -71,7 +81,7 @@ export class HeaderComponent implements OnInit {
     window.location.replace('market://details?id=com.express.Express-Coin');
 
   }
-
+  //  to hide the "http://"" entry
   openApp(){
     window.location.replace('http://');
     this.updateHeader();

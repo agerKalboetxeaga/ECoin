@@ -9,6 +9,7 @@ import { NFT } from 'src/app/interfaces/nft.interface';
   styleUrls: ['./nft-component.component.css']
 })
 export class NftComponentComponent implements OnInit {
+  //Variable declarations
   @Input() nft !: NFT;
   @Output() comprarNFT = new EventEmitter<NFT>();
   imagePath : any;
@@ -23,6 +24,7 @@ export class NftComponentComponent implements OnInit {
 
   onClick(): void
 {
+  //to lower case + send to parent component selected NFT
   this.nft.id?.toLocaleLowerCase();
   this.nft.creator.toLocaleLowerCase();
   this.nft.name.toLocaleLowerCase();

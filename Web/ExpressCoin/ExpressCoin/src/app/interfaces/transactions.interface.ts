@@ -1,3 +1,4 @@
+//  Interface class
 export interface CryptoTransactions{
     id : string;
     user : string;

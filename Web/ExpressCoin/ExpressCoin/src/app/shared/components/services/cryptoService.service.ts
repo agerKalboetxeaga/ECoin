@@ -15,11 +15,15 @@ import { CryptoSymbolModel } from 'src/app/models/cryptoSymbol.model';
 import { RunEXECommand } from 'src/app/models/runExecommand.model';
 import { NFTUser } from 'src/app/models/createNFTandUser.model';
 import { NFT } from 'src/app/interfaces/nft.interface';
-
+/**
+ * This class is the service class for API communication
+ * (POST/GET calls)
+ */
 @Injectable({
     providedIn: 'root'
   })
 export class CryptoService {
+    //  Variable declaration
     apiURL = 'http://localhost:5000/';
     crypto !: CryptoSymbol;
     nftID !: string;

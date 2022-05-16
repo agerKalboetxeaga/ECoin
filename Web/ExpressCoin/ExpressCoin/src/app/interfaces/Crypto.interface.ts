@@ -1,3 +1,4 @@
+//  Interface class
 export interface CryptoSymbol {
     id : string;
     name : string;

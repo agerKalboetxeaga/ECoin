@@ -19,6 +19,7 @@ import { UserMaker } from 'src/app/models/user.model';
 })
 export class LoginFormComponent implements OnInit {
 
+  //  Variable declaration
   email !: string;
   pass !: string;
 
@@ -32,8 +33,10 @@ export class LoginFormComponent implements OnInit {
   onClick(): void{
     
     let user : UserMaker;
+    //  Creating a new user and hashing the entered password to send it to the API
     this.hashPass(this.pass).then(hp => user = new UserMaker(this.email, hp, null, null, null, null, null)).then(u => this.logUser.emit(user));
 
+    // In the API it will compare the stored hashed pass´s with given pass
   }
 
 

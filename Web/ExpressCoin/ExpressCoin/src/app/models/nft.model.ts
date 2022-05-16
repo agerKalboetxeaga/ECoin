@@ -1,3 +1,4 @@
+//  Model class
 export class NFTModel {
 
     id !: string | null;

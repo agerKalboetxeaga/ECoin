@@ -19,6 +19,8 @@ import { UserMaker } from 'src/app/models/user.model';
   ]
 })
 export class RegisterFormComponent implements OnInit {
+  //  Variable declarations
+  //  Variables will be set on user´s change (ngModel)
   email !: string;
   user !: string;
   name !: string;
@@ -35,15 +37,21 @@ export class RegisterFormComponent implements OnInit {
   }
 
 
-
+  /**
+   * Register method
+   */
   register(): void{
-    console.log(this.pass)
+
+    //console.log(this.pass)
+    // Looking for nulls
     if(this.pass != "" && this.email != "" && this.name != "" && this.confirmPass != "" && this.user != ""){
       if (this.pass === this.confirmPass){
-  
+        
+        //  Creating a new USER with the given data
         let user : UserMaker;
         this.role="user";
-        console.log(this.pass, this.email, this.name, this.confirmPass, this.role, this.user);
+        //console.log(this.pass, this.email, this.name, this.confirmPass, this.role, this.user);
+        //Hashing the pass and then sending it
         this.hashPass(this.pass).then(hp =>  user = new UserMaker(this.email, hp, this.user, this.name ,this.role, null, null )).then(u => this.registerUser.emit(user)); //
 
       }else {
@@ -54,7 +62,11 @@ export class RegisterFormComponent implements OnInit {
       }
     }
 
-
+    /**
+     * This method will take a plain text and hash to SHA-256
+     * @param _pass plain string password
+     * @returns hashed password
+     */
     async hashPass(_pass : string){
       //encode as UTF-8
       const msgBuffer = new TextEncoder().encode(_pass);

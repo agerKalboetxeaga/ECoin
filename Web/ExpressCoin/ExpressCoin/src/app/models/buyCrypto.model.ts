@@ -1,6 +1,7 @@
 import { CryptoSymbol } from "../interfaces/Crypto.interface";
 import { User } from "../interfaces/user.interface";
 
+//  Model class
 export class BuyCrypto{
     user !: string;
     cryptos !: CryptoSymbol[];

@@ -1,1 +1,1 @@
-{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"5a2f8c9c08f94fba844ee73bcc1c229f","collectionName":"nfts","type":"collection"}
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"8072640df3704740a1ba480208fccd96","collectionName":"nfts","type":"collection"}

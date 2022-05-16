@@ -12,28 +12,39 @@ import { LoginService } from 'src/app/shared/components/services/loginService.se
   styleUrls: ['./user-management.component.css']
 })
 export class UserManagementComponent implements OnInit {
+
+  //  Variable declaration
   user !: User;
+
   constructor(private cookieSvc : CookieService, 
     private loginSvc : LoginService,
     private cyptoSvc : CryptoService,
     private router : Router) { }
 
   ngOnInit(): void {
+    //  Getting logged user
     this.loginSvc.getUser(this.loginSvc.getToken()).pipe(
       tap((_user : User) => this.user = _user)
     ).subscribe();
   }
 
+  /**
+   * This method will logout the user
+   * deleting the login token
+   */
   logOut(){
     this.cookieSvc.delete("token");
     window.location.reload();
 
   }
+  /**
+   * This method will change the password of the logged user
+   */
   changePassword(){
 
     let _newPass = (<HTMLInputElement> document.getElementById("_newPass")).value;
     
-  
+    //Hashing the password and then, sending to the API
     this.hashPass(_newPass).then(hp => 
       {
         this.user.pass= hp;
