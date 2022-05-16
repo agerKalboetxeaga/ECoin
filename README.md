@@ -30,24 +30,24 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo">
+    <img max-width="50%" src="Web/ExpressCoin/ExpressCoin/src/assets/images/express_coin.png" alt="Logo">
   </a>
 
-  <h3 align="center">GOD RUN PROJECT</h3>
+  <h3 align="center">EXPRESS COIN</h3>
 
   <p align="center">
-    Androidentzako joko bat, Odoo modulo berri bat eta REST API Zerbitzua
+    Functional Cryptocurrencies Web Page <br> Created on <b>ANGULAR 12</b> (Front-end) and <b>PYTHON 3</b> (Back-end)
     <br />
-    <a href="https://github.com/agerKalboetxeaga/ERRONKA_3/tree/main/erronka_DOCS"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/agerKalboetxeaga/ECoin"><strong>Project main Repository »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/agerKalboetxeaga/ERRONKA_3/tree/main/c%23">C#</a>
+    <a href="https://github.com/agerKalboetxeaga/ECoin/tree/main/Python">Python</a>
     ·
-    <a href="https://github.com/agerKalboetxeaga/ERRONKA_3/tree/main/android">Android</a>
+    <a href="https://github.com/agerKalboetxeaga/ECoin/tree/main/Web">Angular</a>
     ·
-    <a href="https://github.com/agerKalboetxeaga/ERRONKA_3/tree/main/java">Java</a>
+    <a href="https://github.com/agerKalboetxeaga/ERRONKA_3/tree/main/java">Executables</a>
      ·
-    <a href="https://github.com/agerKalboetxeaga/ERRONKA_3/tree/main/erronka_DOCS/odoo/partidak">Odoo</a>
+    <a href="https://github.com/agerKalboetxeaga/ECoin/tree/main/exportarDB">Database DATA</a>
   </p>
 </div>
 
@@ -84,16 +84,15 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](images/juegoscreen.jpg)
 
-Gure proiektuak oso konpletua da eta erabil erraza: [[Java classDiagram]](https://github.com/agerKalboetxeaga/ERRONKA_3/blob/main/java/GodRun_Java_Diagram.svg)
+<p align="center">This is a working web page oriented to Cryptocurrency world.</p><br>
+ 
+```
+"Cryptos have become very popular in the last years and lot of businesmen wants to jump into the train."
+```
+This project will allow you to have your own Crypto Web Page.
 
-Horregatik:
-* Joko ona (aleatorioki sortzen da partida bakoitza Rogue-like jokoen antzera pixel art itxurarekin)
-* Konexio baldintza baxuak jokatzeko: nahiz eta aeroportuko wifia izan jokoa ondo funtzionatuko du
-* Zerbitzari guztia konpaktatuta aplikazio batean :smile:
-
-Noski, nahiz eta erraza izan hobe da gidatxoa jarraitzea:
+This project also includes a [tool](https://github.com/agerKalboetxeaga/ECoin/blob/main/Executables/crypto_exe.exe) that gets all different cryptocurrency names stored in the DB, and searches its real values on the internet, finally it saves those records in the DB.
 
 <!-- Use the `BLANK_README.md` to get started. -->
 
@@ -103,77 +102,75 @@ Noski, nahiz eta erraza izan hobe da gidatxoa jarraitzea:
 
 ### Built With
 
-Sekzio honetan proiektuarentzako erabili ditugun lengoaia desberdinak adierazten dira:
+In this section we will say what programming languages are being used on this project:
 
-* [C#](https://docs.microsoft.com/es-es/dotnet/csharp/)
+* [Angular 12](https://angular.io/)
 * [Javascript](https://www.javascript.com/)
-* [Java](https://www.java.com/es/)
+* [TypeScript](https://www.typescriptlang.org/)
 * [Html](https://www.w3schools.com/html/)
 * [Bash](https://bioinf.comav.upv.es/courses/unix/scripts_bash.html)
 * [Bootstrap](https://getbootstrap.com)
+* [Python 3](https://www.python.org/downloads/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
 ### Prerequisites
-Hasteko bi datubase eta zerbitzu bat izan behar dituzu:
- * [Odoo 14](https://www.odoo.com/es_ES/page/download) Zerbitzaria [PostgreSQL](https://www.postgresql.org/) abiarazita izan behar duzu
-    (Gomendagarria da datu baseak DisunityOfPepe izena izatea). Ondoren employees modulua instalatu behar da.
-  
 
-* [MongoDB](https://www.mongodb.com/) Datubasea.
-* [Java jdk 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
-* [Java IDE bat](https://www.eclipse.org/downloads/)
+To begin with you must have installed our DB => 
+ * [Mongo DB](https://www.mongodb.com/)
+ 
+Then, we need to install:
+* [Node.Js](https://nodejs.org/es/)
 
 <!-- GETTING STARTED -->
 ## Getting Started
-Programa hasi baino lehenago zihurtatu Odoo eta MongoDB zerbitzuak abiarazita daudela. Ondoren kanpoko konexioak ahalbideratzeko joan zaitez:
-   ```sh
-  C:\Program Files\MongoDB\Server\5.0\bin\mongod.cfg
+In order to get working our Angular project we will need to install the Angular/cli.
+To do this open the command prompt (cmd) and type:
+   Check Node Packet Manager version:
    ```
-   eta bertan "bindIp" eremuan 0.0.0.0 ip-a ezarri.
-  
-Ostean postgreseko konfigurazioa aldatu:
+   npm -v
+   ```
+   if node is installed correctly we can install the angular client
 
-   ```sh
-  C:\Program Files\Odoo\PostgreSQL\data\pg_hba.conf
    ```
-  fitxategia ireki eta ostean zuk nahi duzun ip-a gehitu:
+   npm install -g @angular/cli
+   ```
+  Finally we can check installed angular version
   
-   ```sh
-   TYPE  DATABASE        USER            ADDRESS             METHOD
-   host    all           all             <IP>/32              md5
+   ```
+   ng version
    ```
   
 ### Installation
 
-_Github errepositorioa klonatu hasteko..._
+_Clone GitHub repository first..._
 
-* Odoo modulua:
-1. _erronka_DOCS/odoo/_ karpetako partidak kopiatu eta odoo instalatuta duzun karpetako moduluan itxatxi:
-  ```sh
-   C:\Program Files\Odoo\server\odoo\addons  (Windows 7 +)
-   ```
-2. Joan odoo serbitzarira web bidez administrari bezala eta ajusteetara joan. "General settings" en azpian "Developer Tools" atalean
-    Developer mode -a aktibatu.
 
-3. Orain aplikazioen kudeaketa horrira joan eta goiko aukeretatik "_Update Apps List_" aukera eman. 
+1. Update Database : If is the first time, you can open _"[exportarDB](https://github.com/agerKalboetxeaga/ECoin/tree/main/exportarDB)"_ folder and execute _"importar.bat"_
+      This will update your database adding new items 
   
-4. Azkenik aplikazioetan partidak modulua bilatu eta instalatu. _Modulua instalatuta dago_
- 
-* Android jokoa:
-1. Githubeko errepositorioko _joko.apk_ deskargatu mobilean eta instalatuta izango zenukete.
-* Zerbitzaria:
-1. Java paketean dagoen Main Server proiektua ireki zuk nahi duzun IDE arekin.
-2. Baliteke Datubaseentzako konexioak aldatu behar izana: 
-      Postgreserako (src/main/resources/) application.properties fitxategia (_db.url_ eremua)
-      MongoDB-rako proiektuko karpetan, _mongolize.sh scriptak_ du mongo db ko konexioko ip a
-4. Ondoren java proiektua exekutatu
-5. Orain zerbitzaria martxan dago partidako fitxategiak interzeptatzen eta datu baseetara igotzen. Gainera 8080 portuko zerbitzua abiarazten du.
-6. Azkenik C# proiektua exekutatu eta dena martxan izango duzu. Orain bakarrik jolastea geratzen da.
+2. Run the Rest API : if you are not interested in development you can start the service without having python installed.
+      To do that you only have to go to _"[Executables](https://github.com/agerKalboetxeaga/ECoin/tree/main/Executables)"_ folder and run 
+      ```
+      RestAPI.exe
+      ```
 
+3. Next and finally, we need to start our Angular Web Page:<br>
+    - *Go to project´s [root](https://github.com/agerKalboetxeaga/ECoin/tree/main/Web/ExpressCoin/ExpressCoin) folder and then, to launcher folder*<br>
+    - *Run _launch.bat_*
+  
+ 4. Enjoy! : You have successfuly deployed the project in your local device!<br><br>
+  #### ! If there is some module error or the launcher doesnt work you will ned to do the following ¡
 
+  1. Go back to the root folder and delete "node_modules" folder.
+  2. Open the cmd on the same folder and type : 
+  ```
+  npm install
+  ```
+  This will install all required node.js modules.
+  
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
@@ -181,15 +178,19 @@ _Github errepositorioa klonatu hasteko..._
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-### Jokoaren Tutoriala
-Eskuineko geziak nora tiro egin nahi duzun aukeratzeko da. 
-Ezkerreko geziak norabidea ezartzen du.
-Sala bereziak daude (Horiak) eta hauek item batzuk ditu. Item bakoitzak abantail/desabantail desberdinak emango digute gameplay-a hobetzeko
-Sala gorriak daude (Jefea) Behin jefea garaituta (negar egingo duzu 🥲) jokoa amaituko da.
+### Web Usage
+On this Web Page you can:
+* Register/Log-in
+* See listed all NFT/Cryptocurrencies with its Real-time values 
+* Add new Cryptocurrencies
+* Create new NFTs
+* Buy Cryptocurrencies
+* Use bought Cryptocurrencies to buy NFTs
 
-### Zerbitzaria/Web Orria
-Lehen esan bezala zabaldu visual eta eclipse. 
-Proiektuak exekutatu (eclipseko proiektua lehenengo).
+
+### The "[crypto_exe.exe](https://github.com/agerKalboetxeaga/ECoin/blob/main/Python/Cryptos_Mongo_Auto.py)" Tool:
+  This tool created by us will update database´s criptocurrency value data based in real World Data and its exported to exe in 
+   _"[Executables](https://github.com/agerKalboetxeaga/ECoin/tree/main/Executables)"_ folder
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
@@ -197,12 +198,11 @@ Proiektuak exekutatu (eclipseko proiektua lehenengo).
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Add Final Boss
-- [x] Add back to top links
-- [ ] Implement connections in the game
-- [ ] Finish Web-Page
+- [ ] Add Role permissions
+- [ ] Login fail attemp management
+- [ ] Create non-existing Cryptocurrencies
 
-See the [open issues](https://github.com/agerKalboetxeaga/ERRONKA_3/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/agerKalboetxeaga/ECoin/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -230,9 +230,10 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Ager Kalboetxeaga - [kalboetxeaga.ager@uni.eus](https://mail.google.com/)
+Ager Kalboetxeaga - [kalboetxeaga.ager@uni.eus](https://mail.google.com/)<br>
+Markel Salgado - [salgado.markel@uni.eus](https://mail.google.com/)
 
-Project Link: [https://github.com/agerKalboetxeaga/ERRONKA_3](https://github.com/agerKalboetxeaga/ERRONKA_3)
+Project Link: [https://github.com/agerKalboetxeaga/ECoin](https://github.com/agerKalboetxeaga/ECoin)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -241,10 +242,9 @@ Project Link: [https://github.com/agerKalboetxeaga/ERRONKA_3](https://github.com
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+Those are few website´s we used for learning:
 
-* [Some tutorials we used](https://openwebinars.net/)
-* [Learning bash](https://www.mastermind.ac/)
+* [Most of my knoweldge](https://youtube.com/)
 * [Other useful tutorials](https://www.mastermind.ac/)
 * [More media](https://elearning20.hezkuntza.net/012053/enrol/index.php?id=31)
 * [For resolving errors](https://stackoverflow.com/)
